@@ -1,0 +1,9 @@
+@use '../styles/variables/colors' as *;
+
+:host {
+  display: block;
+
+  .title {
+    color: $primary;
+  }
+}
