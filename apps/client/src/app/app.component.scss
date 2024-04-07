@@ -2,7 +2,8 @@
 
 :host {
   display: block;
-
+  max-width: 2000px;
+  margin: auto;
   .title {
     color: $primary;
   }

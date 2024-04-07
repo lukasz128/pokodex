@@ -1,17 +1,30 @@
-@use 'styles/config/fonts';
+@use './styles/config/fonts';
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 html,
 body {
   height: 100%;
-  font-size: 62.5%;
 }
 
 body {
   margin: 0;
-  background: black;
+  background: white;
+  font-size: 16px;
   font-familly: 'Roboto';
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }

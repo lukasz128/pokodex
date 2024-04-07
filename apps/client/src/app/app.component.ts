@@ -1,17 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Test } from '@pokodex/interfaces';
+import { LayoutComponent } from './components/layout/layout.component';
+import { icons } from './icon.root';
+import { MatIconRegistry } from '@angular/material/icon';
+import { CustomIconBase } from './abstract/custom-icon.base';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, LayoutComponent, MatSliderModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  title = 'client';
-
-  private test: Test = { test: 'sdf' };
+export class AppComponent extends CustomIconBase {
+  constructor(
+    private readonly matIconRegistry: MatIconRegistry,
+    private readonly sanitizer: DomSanitizer
+  ) {
+    super(matIconRegistry, sanitizer, icons);
+  }
 }

@@ -1,0 +1,12 @@
+@use '../../../../../node_modules/@angular/material/index' as mat;
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+$-ubisell-typography-config: mat.define-typography-config(
+  $font-family: 'Poppins',
+);
+
+@include mat.all-component-typographies($-ubisell-typography-config);

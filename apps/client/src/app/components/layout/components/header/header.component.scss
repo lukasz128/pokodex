@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  background-color: #7e4343;
+  padding: 0 3rem;
+
+  .app-title {
+    color: white;
+    margin: 0;
+  }
+  .container-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
