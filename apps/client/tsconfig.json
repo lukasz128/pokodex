@@ -9,7 +9,11 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@app": ["apps/client/src/app*"]
+      // "@env": ["apps/client/src/"]
+    }
   },
   "files": [],
   "include": [],

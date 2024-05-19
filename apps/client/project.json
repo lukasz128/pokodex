@@ -21,7 +21,10 @@
           "apps/client/src/styles.scss",
           "apps/client/src/styles/config/_material-theme.scss"
         ],
-        "scripts": []
+        "scripts": [],
+        "stylePreprocessorOptions": {
+          "includePaths": ["apps/client/src/styles"]
+        }
       },
       "configurations": {
         "production": {
