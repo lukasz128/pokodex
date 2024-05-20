@@ -17,7 +17,6 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
-          more ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
       - name: Build Docker image
