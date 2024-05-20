@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start:api": "npx nx run api:serve",
-    "build:api": "npx nx run api:build",
-    "start:client": "npx nx run client:serve"
+    "start:client": "npx nx run client:serve",
+    "build:api": "npx nx run api:build"
   },
   "private": true,
   "dependencies": {
@@ -20,8 +20,11 @@
     "@nx/angular": "18.1.2",
     "axios": "^1.6.0",
     "express": "^4.18.1",
+    "mysql": "^2.18.1",
+    "reflect-metadata": "^0.2.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "typeorm": "^0.3.20",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
@@ -53,7 +56,7 @@
     "@swc/core": "~1.3.85",
     "@swc/helpers": "~0.5.2",
     "@types/jest": "^29.4.0",
-    "@types/node": "18.16.9",
+    "@types/node": "^18.16.9",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
     "eslint": "~8.48.0",
@@ -64,7 +67,7 @@
     "jest-environment-node": "^29.4.1",
     "jest-preset-angular": "~14.0.3",
     "nx": "18.1.2",
-    "prettier": "^2.6.2",
+    "prettier": "^3.1.0",
     "react-refresh": "^0.10.0",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
