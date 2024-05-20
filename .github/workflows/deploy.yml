@@ -17,6 +17,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
+          more ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
       - name: Build Docker image
@@ -24,7 +25,7 @@ jobs:
 
       - name: Push Docker image to VPS
         run: |
-          docker save lukasz128/pokodex | bzip2 | ssh -o StrictHostKeyChecking=no root@srv27.mikr.us:20258 'bunzip2 | docker load'
+          docker save lukasz128/pokodex | bzip2 | ssh -o StrictHostKeyChecking=no root@srv27.mikr.us -p 10258 'bunzip2 | docker load'
 
       - name: Run Docker container on VPS
         run: |
