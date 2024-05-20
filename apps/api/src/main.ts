@@ -5,6 +5,7 @@
 
 import express from 'express';
 import * as path from 'path';
+import 'reflect-metadata';
 
 const app = express();
 
