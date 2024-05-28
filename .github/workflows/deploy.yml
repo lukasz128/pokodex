@@ -32,5 +32,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no root@srv27.mikr.us -p 10258 << 'EOF'
             docker stop pokodex || true
             docker rm pokodex || true
-            docker run -d --name pokodex -p 3333:3000 lukasz128/pokodex
+            docker run -d --name pokodex -p 3000:3333 lukasz128/pokodex
           EOF
