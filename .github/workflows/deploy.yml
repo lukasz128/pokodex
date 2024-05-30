@@ -33,6 +33,8 @@ jobs:
           if ["$IMAGE_ID" != "$REMOTE_IMAGE_ID" ]; then
             docker rmi $REMOTE_IMAGE_ID || true
             docker save lukasz128/pokodex | bzip2 | ssh -o StrictHostKeyChecking=no root@srv27.mikr.us -p 10258 'bunzip2 | docker load'
+          else
+            echo "Images are the same"
           fi
 
       # - name: Push Docker image to VPS
