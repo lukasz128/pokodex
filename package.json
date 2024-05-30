@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "start": "npx nx run-many -t serve-with-hosted-api -p client api",
     "start:api": "npx nx run api:serve",
     "start:client": "npx nx run client:serve",
     "build:api": "npx nx run api:build"

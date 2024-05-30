@@ -19,6 +19,12 @@
         }
       }
     },
+    "serve-with-hosted-api": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ssh -N -L 3000:localhost:3000 root@srv27.mikr.us -p 10258"
+      }
+    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
