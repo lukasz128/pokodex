@@ -31,7 +31,7 @@ jobs:
           IMAGE_ID=$(cat image_id.txt)
           REMOTE_IMAGE_ID=$(ssh -p 10258 -o StrictHostKeyChecking=no root@srv27.mikr.us 'docker inspect --format="{{index .Id}}" lukasz128/pokodex || echo "none"')
           if ["$IMAGE_ID" != "$REMOTE_IMAGE_ID" ]; then
-            docker rmi $REMOTE_IMAGE_ID
+            docker rmi $REMOTE_IMAGE_ID || true
             docker save lukasz128/pokodex | bzip2 | ssh -o StrictHostKeyChecking=no root@srv27.mikr.us -p 10258 'bunzip2 | docker load'
 
       # - name: Push Docker image to VPS
