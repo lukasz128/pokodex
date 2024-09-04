@@ -1,5 +1,5 @@
 # Dockerfile
-FROM localhost:5000/node:20.0.0
+FROM node:20.0.0
 
 # Create app directory
 WORKDIR /usr/src/app
