@@ -19,9 +19,6 @@ jobs:
       - name: Build the Docker image
         run: docker build -t ${{secrets.VPS_IP}}/pokodex-dev-api:latest .
 
-      - name: Push the Docker image to local registry
-        run: docker push ${{secrets.VPS_IP}}/pokodex-dev-api:latest
-
       - name: Deploy on VPS (Optional via SSH)
         uses: appleboy/ssh-action@v0.1.6
         with:
