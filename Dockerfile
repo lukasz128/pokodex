@@ -1,12 +1,12 @@
 # Dockerfile
-FROM node:20.0.0
+FROM localhost:5000/node:20.0.0
 
 # Create app directory
 WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm install --production
 
 # Bundle app source
 COPY . .

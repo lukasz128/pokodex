@@ -3,34 +3,37 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - main
+      - new-architecutre-for-client
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  build-and-deploy:
+    runs-on: alpine-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh/
-          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-      - name: Build Docker image
-        run: docker build -t lukasz128/pokodex .
+      - name: Log in to Docker Registry (Your VPS Docker Registry)
+        run: echo "${{ secrets.VPS_DOCKER_PASSWORD }}" | docker login localhost:5000 -u ${{ secrets.VPS_DOCKER_USERNAME }} --password-stdin
 
-      - name: Push Docker image to VPS
-        run: |
-          docker save lukasz128/pokodex | bzip2 | ssh -o StrictHostKeyChecking=no root@srv27.mikr.us -p 10258 'bunzip2 | docker load'
+      - name: Build the Docker image
+        run: docker build -t localhost:5000/pokodex-dev-api:latest .
 
-      - name: Run Docker container on VPS
-        run: |
-          ssh -o StrictHostKeyChecking=no root@srv27.mikr.us -p 10258 << 'EOF'
-            docker stop pokodex || true
-            docker rm pokodex || true
-            docker run -d --name pokodex -p 3000:3333 lukasz128/pokodex
-          EOF
+      - name: Push the Docker image to local registry
+        run: docker push localhost:5000/pokodex-dev-api:latest
+
+      - name: Deploy on VPS (Optional via SSH)
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.VPS_SSH__SSH_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{secrets.VPS_SSH_PORT}}
+          script: |
+            docker pull localhost:5000/pokodex-dev-api:latest
+            docker stop node_app || true
+            docker rm node_app || true
+            docker run -d --name node_app -p 3000:3333 localhost:5000/pokodex-dev-api:latest
