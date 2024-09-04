@@ -16,14 +16,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      # - name: Log in to Docker Registry (Your VPS Docker Registry)
-      #   run: echo "${{ secrets.VPS_DOCKER_PASSWORD }}" | docker login localhost:5000 -u ${{ secrets.VPS_DOCKER_USERNAME }} --password-stdin
-
       - name: Build the Docker image
-        run: docker build -t localhost:5000/pokodex-dev-api:latest .
+        run: docker build -t ${{secrets.VPS_IP}}/pokodex-dev-api:latest .
 
       - name: Push the Docker image to local registry
-        run: docker push localhost:5000/pokodex-dev-api:latest
+        run: docker push ${{secrets.VPS_IP}}/pokodex-dev-api:latest
 
       - name: Deploy on VPS (Optional via SSH)
         uses: appleboy/ssh-action@v0.1.6
@@ -33,7 +30,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{secrets.VPS_SSH_PORT}}
           script: |
-            docker pull localhost:5000/pokodex-dev-api:latest
+            docker pull ${{secrets.VPS_IP}}/pokodex-dev-api:latest
             docker stop node_app || true
             docker rm node_app || true
-            docker run -d --name node_app -p 3000:3333 localhost:5000/pokodex-dev-api:latest
+            docker run -d --name node_app -p 3000:3333 ${{secrets.VPS_IP}}/pokodex-dev-api:latest
