@@ -26,6 +26,7 @@ jobs:
           username: ${{ secrets.VPS_SSH_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{secrets.VPS_SSH_PORT}}
+          debug: true
           script: |
             docker pull ${{secrets.VPS_IP}}/pokodex-dev-api:latest
             docker stop node_app || true
