@@ -16,8 +16,8 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Log in to Docker Registry (Your VPS Docker Registry)
-        run: echo "${{ secrets.VPS_DOCKER_PASSWORD }}" | docker login localhost:5000 -u ${{ secrets.VPS_DOCKER_USERNAME }} --password-stdin
+      # - name: Log in to Docker Registry (Your VPS Docker Registry)
+      #   run: echo "${{ secrets.VPS_DOCKER_PASSWORD }}" | docker login localhost:5000 -u ${{ secrets.VPS_DOCKER_USERNAME }} --password-stdin
 
       - name: Build the Docker image
         run: docker build -t localhost:5000/pokodex-dev-api:latest .
