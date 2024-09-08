@@ -1,4 +1,4 @@
-name: Deploy to VPS
+name: Deploy Develop
 
 on:
   push:
@@ -16,10 +16,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Build the Docker image
-        run: docker build -t ${{secrets.VPS_IP}}/pokodex-dev-api:latest .
+      # - name: Build the Docker image
+      #   run: docker build -t ${{secrets.VPS_IP}}/pokodex-dev-api:latest .
 
-      - name: Deploy on VPS (Optional via SSH)
+      - name: Deploy on VPS
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.VPS_SSH__SSH_HOST }}
@@ -28,6 +28,8 @@ jobs:
           port: ${{secrets.VPS_SSH_PORT}}
           debug: true
           script: |
+            docker build -t ${{secrets.VPS_IP}}/pokodex-dev-api:latest .
+            docker push ${{secrets.VPS_IP}}/pokodex-dev-api:latest
             docker pull ${{secrets.VPS_IP}}/pokodex-dev-api:latest
             docker stop node_app || true
             docker rm node_app || true
