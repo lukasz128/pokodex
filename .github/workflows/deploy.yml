@@ -49,3 +49,4 @@ jobs:
             docker stop node_app || true
             docker rm node_app || true
             docker run -d --name node_app -p 3000:3333 ${{secrets.VPS_IP}}/pokodex-dev-api:latest
+            EOF
