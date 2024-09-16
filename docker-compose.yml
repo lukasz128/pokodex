@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  client:
+    image: nginx:stable-alpine
+    container_name: client
+    volumes:
+      - ./client/dist
+
+  api:
+  db:

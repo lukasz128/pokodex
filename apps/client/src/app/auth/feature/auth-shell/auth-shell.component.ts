@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
+  selector: 'app-auth-shell',
   standalone: true,
   imports: [RouterModule],
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  templateUrl: './auth-shell.component.html',
+  styleUrl: './auth-shell.component.scss',
 })
-export class AppComponent {}
+export class AuthShellComponent {}
