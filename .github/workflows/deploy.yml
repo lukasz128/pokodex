@@ -28,14 +28,14 @@ jobs:
       # Build and push the Docker image for the API (Express.js)
       - name: Build and push API image
         run: |
-          docker build -t ${{ secrets.VPS_DOCKER_USERNAME }}/my-api:latest -f Dockerfile-api .
-          docker push ${{ secrets.VPS_DOCKER_USERNAME }}/my-api:latest
+          docker build -t ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-api.dev:latest -f Dockerfile-api .
+          docker push ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-api.dev:latest
 
       # Build and push the Docker image for the Client (Angular)
       - name: Build and push Client image
         run: |
-          docker build -t ${{ secrets.VPS_DOCKER_USERNAME }}/my-client:latest -f Dockerfile-client .
-          docker push ${{ secrets.VPS_DOCKER_USERNAME }}/my-client:latest
+          docker build -t ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-client.dev:latest -f Dockerfile-client .
+          docker push ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-client.dev:latest
 
   deploy:
     runs-on: ubuntu-latest
