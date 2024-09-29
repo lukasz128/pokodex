@@ -1,69 +1,63 @@
-# name: Deploy Develop
+name: Build and Deploy
 
-# on:
-#   push:
-#     branches:
-#       - new-architecutre-for-client
+on:
+  push:
+    branches:
+      - main # Trigger on push to the main branch
 
-# jobs:
-#   build-and-deploy:
-#     runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-#       - name: Set up Docker Buildx
-#         uses: docker/setup-buildx-action@v1
+      # Set up Docker Buildx (optional, but useful for building multi-platform images)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
-#       - name: Build the Docker image
-#         run: docker build -t pokodex-dev-api:latest .
+      # Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.VPS_DOCKER_USERNAME }}
+          password: ${{ secrets.VPS_DOCKER_PASSWORD }}
 
-#       - name: Save Docker image
-#         run: docker save pokodex-dev-api:latest > pokodex-dev-api.tar
-#       - name: Save Docker image checksum
-#         run: docker inspect --format='{{index .Id}}' lukasz128/pokodex > image_id.txt
+      # Build and push the Docker image for the API (Express.js)
+      - name: Build and push API image
+        run: |
+          docker build -t ${{ secrets.VPS_DOCKER_USERNAME }}/my-api:latest -f Dockerfile-api .
+          docker push ${{ secrets.VPS_DOCKER_USERNAME }}/my-api:latest
 
-#       - name: Push Docker image to VPS if diffrent
-#         run: |
-#           IMAGE_ID=$(cat image_id.txt)
-#           REMOTE_IMAGE_ID=$(ssh -p 10258 -o StrictHostKeyChecking=no root@srv27.mikr.us 'docker inspect --format="{{index .Id}}" lukasz128/pokodex || echo "none"')
-#           if ["$IMAGE_ID" != "$REMOTE_IMAGE_ID" ]; then
-#             docker rmi $REMOTE_IMAGE_ID || true
-#             docker save lukasz128/pokodex | bzip2 | ssh -o StrictHostKeyChecking=no root@srv27.mikr.us -p 10258 'bunzip2 | docker load'
-#           else
-#             echo "Images are the same"
-#           fi
+      # Build and push the Docker image for the Client (Angular)
+      - name: Build and push Client image
+        run: |
+          docker build -t ${{ secrets.VPS_DOCKER_USERNAME }}/my-client:latest -f Dockerfile-client .
+          docker push ${{ secrets.VPS_DOCKER_USERNAME }}/my-client:latest
 
-#       # - name: Push Docker image to VPS
-#       #   run: |
-#       #     docker save lukasz128/pokodex | bzip2 | ssh -o StrictHostKeyChecking=no root@srv27.mikr.us -p 10258 'bunzip2 | docker load'
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
 
-#       - name: 'SCP to vps'
-#         uses: appleboy/scp-action@master
-#         with:
-#           host: ${{ secrets.VPS_SSH_HOST }}
-#           username: ${{ secrets.VPS_SSH_USER }}
-#           key: ${{ secrets.VPS_SSH_KEY }}
-#           port: ${{secrets.VPS_SSH_PORT }}
-#           debug: true
-#           source: 'pokodex-dev-api.tar'
-#           target: '~/'
+    steps:
+      # Deploy to VPS using appleboy/ssh-action
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.VPS_SSH_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.VPS_SSH_PORT }}
+          script: |
+            cd /path/to/your/deployment
 
-#       - name: Deploy on VPS
-#         uses: appleboy/ssh-action@v0.1.6
-#         with:
-#           host: ${{ secrets.VPS_SSH_HOST }}
-#           username: ${{ secrets.VPS_SSH_USER }}
-#           key: ${{ secrets.VPS_SSH_KEY }}
-#           port: ${{secrets.VPS_SSH_PORT}}
-#           debug: true
-#           script: |
-#             docker load --input pokodex-dev-api.tar
-#             docker image tag pokodex-dev-api:latest ${{secrets.VPS_IP}}/pokodex-dev-api:latest
-#             docker push ${{secrets.VPS_IP}}/pokodex-dev-api:latest
-#             docker pull ${{secrets.VPS_IP}}/pokodex-dev-api:latest
-#             docker stop node_app || true
-#             docker rm node_app || true
-#             docker run -d --name node_app -p 3000:3333 ${{secrets.VPS_IP}}/pokodex-dev-api:latest
-#             EOF
+            # Pull the latest images from Docker Hub
+            docker-compose pull
+
+            # Stop and remove the current containers
+            docker-compose down
+
+            # Start new containers with the latest images
+            docker-compose up -d

@@ -1,8 +1,4 @@
-@use 'styles/config/fonts';
-
-* {
-  box-sizing: border-box;
-}
+@use 'config/fonts';
 
 html {
   font-size: 62.5%;
@@ -14,6 +10,5 @@ body {
 }
 
 body {
-  margin: 0;
-  font-familly: 'Roboto';
+  font-family: 'Inter', sans-serif;
 }

@@ -3,6 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
+import cors from 'cors';
 import express from 'express';
 import * as path from 'path';
 import 'reflect-metadata';
@@ -10,6 +11,7 @@ import 'reflect-metadata';
 const app = express();
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use(cors({ origin: 'http://localhost' }));
 
 app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to pokodex api!' });

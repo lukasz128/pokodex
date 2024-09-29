@@ -17,11 +17,14 @@
         "tsConfig": "apps/client/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/client/src/favicon.ico", "apps/client/src/assets"],
-        "styles": ["apps/client/src/styles.scss"],
-        "scripts": [],
+        "styles": [
+          "apps/client/src/styles/utils/_reset.scss",
+          "apps/client/src/styles.scss"
+        ],
         "stylePreprocessorOptions": {
-          "includePaths": []
-        }
+          "includePaths": ["apps/client/src/styles"]
+        },
+        "scripts": []
       },
       "configurations": {
         "production": {
@@ -107,7 +110,10 @@
         "port": 4400,
         "configDir": "apps/client/.storybook",
         "browserTarget": "client:build",
-        "compodoc": false
+        "compodoc": false,
+        "stylePreprocessorOptions": {
+          "includePaths": ["apps/client/src/styles"]
+        }
       },
       "configurations": {
         "ci": {

@@ -1,0 +1,7 @@
+@use 'variables/colors';
+
+:host {
+  display: block;
+
+  color: colors.$black;
+}

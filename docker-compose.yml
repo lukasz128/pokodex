@@ -1,11 +1,27 @@
 version: '3.8'
-
 services:
-  client:
-    image: nginx:stable-alpine
-    container_name: client
-    volumes:
-      - ./client/dist
-
   api:
-  db:
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    ports:
+      - '3000:3333'
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - client
+    networks:
+      - app-network
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile-client
+    ports:
+      - '80:80'
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
