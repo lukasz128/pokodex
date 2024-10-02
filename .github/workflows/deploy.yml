@@ -44,7 +44,7 @@ jobs:
     steps:
       - name: 'Prepare file to SCP'
         run: |
-          tar docker-compose.yml docker-compose.yml.tar
+          tar -cvf docker-compose.yml.tar docker-compose.yml
       - name: 'SCP to vps'
         uses: appleboy/scp-action@master
         with:
@@ -68,7 +68,7 @@ jobs:
             docker login -p ${{ secrets.VPS_DOCKER_PASSWORD }} -u ${{secrets.VPS_DOCKER_USERNAME}}
 
             #before docker-compose I need to place docker-compose.yml on vps
-            tar -zxvf docker-compose.yml.tar
+            tar xvf docker-compose.yml.tar
 
             # Pull the latest images from Docker Hub
             docker-compose pull
