@@ -42,6 +42,16 @@ jobs:
     needs: build
 
     steps:
+      - name: 'SCP to vps'
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.VPS_SSH_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{secrets.VPS_SSH_PORT }}
+          debug: true
+          source: 'docker-compose.yml'
+          target: '~/'
       # Deploy to VPS using appleboy/ssh-action
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v0.1.6
@@ -51,7 +61,10 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
-            cd /path/to/your/deployment
+            # Login in to dockehub
+            docker login -p ${{ secrets.VPS_DOCKER_PASSWORD }} -u ${{secrets.VPS_DOCKER_USERNAME}}
+
+            #before docker-compose I need to place docker-compose.yml on vps
 
             # Pull the latest images from Docker Hub
             docker-compose pull
