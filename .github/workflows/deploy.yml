@@ -36,7 +36,7 @@ jobs:
         run: |
           docker build -t ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-client.dev:latest -f Dockerfile-client .
           docker push ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-client.dev:latest
-          - name: 'Prepare file to SCP'
+      - name: 'Prepare file to SCP'
           run: |
             tar -cvf docker-compose.yml.tar docker-compose.yml
       - name: 'Docker compose artifact'
