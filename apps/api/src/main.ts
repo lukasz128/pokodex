@@ -14,7 +14,7 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use(cors({ origin: ['http://localhost', 'https://pokodex-dev.byst.re'] }));
 
 app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to pokodex api!' });
+  res.send({ message: 'Welcome to pokodex api! :D:D:D' });
 });
 
 const port = process.env.PORT || 3333;

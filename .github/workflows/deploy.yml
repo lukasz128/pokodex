@@ -92,7 +92,3 @@ jobs:
 
             # Clean up docker-compose files
             rm -rf docker-compose.yml docker-compose.yml.tar
-
-            # Host docker containers
-            domena pokodex-dev.bystr.re 80
-            domena pokodex-dev-api.byst.re 3000
