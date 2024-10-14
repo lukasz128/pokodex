@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  rootUrl: 'http://localhost:3000/api',
+  rootUrl: 'https://pokodex-dev-api.byst.re/api',
 };

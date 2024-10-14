@@ -39,17 +39,13 @@ jobs:
 
       - name: 'Prepare file to SCP'
         run: |
-          mkdir docker-files
-          mv Dockerfile-api docker-files
-          mv Dockerfile-client docker-files
-          mv docker-compose.yml docker-files
-          tar -cvf docker-files.yml.tar docker-files
+          tar -cvf docker-compose.yml.tar docker-compose.yml
 
       - name: 'Docker compose artifact'
         uses: actions/upload-artifact@v4
         with:
           name: docker-compose-artifact
-          path: docker-files.yml.tar
+          path: docker-compose.yml.tar
 
   deploy:
     runs-on: ubuntu-latest
@@ -68,7 +64,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{secrets.VPS_SSH_PORT }}
           debug: true
-          source: 'docker-files.yml.tar'
+          source: 'docker-compose.yml.tar'
           target: '~/'
       # Deploy to VPS using appleboy/ssh-action
       - name: Deploy to VPS
@@ -83,8 +79,7 @@ jobs:
             docker login -p ${{ secrets.VPS_DOCKER_PASSWORD }} -u ${{secrets.VPS_DOCKER_USERNAME}}
 
             #before docker-compose I need to place docker-compose.yml on vps
-            tar xvf docker-files.yml.tar
-            cd docker-files
+            tar xvf docker-compose.yml.tar
 
             # Pull the latest images from Docker Hub
             docker compose pull
@@ -96,5 +91,8 @@ jobs:
             docker compose up -d
 
             # Clean up docker-compose files
-            cd ..
-            rm -rf docker-files.yml.tar docker-files
+            rm -rf docker-compose.yml docker-compose.yml.tar
+
+            # Host docker containers
+            domena pokodex-dev.bystr.re 80
+            domena pokodex-dev-api.byst.re 3000
