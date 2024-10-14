@@ -82,10 +82,13 @@ jobs:
             tar xvf docker-compose.yml.tar
 
             # Pull the latest images from Docker Hub
-            docker-compose pull
+            docker compose pull
 
             # Stop and remove the current containers
-            docker-compose down
+            docker compose down
 
             # Start new containers with the latest images
-            docker-compose up -d
+            docker compose up -d
+
+            # Clean up docker-compose files
+            rm -rf docker-compose.yml docker-compose.yml.tar
