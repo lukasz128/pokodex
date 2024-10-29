@@ -19,7 +19,7 @@
         }
       }
     },
-    "serve-with-hosted-api": {
+    "serve-with-docker-api": {
       "executor": "nx:run-commands",
       "options": {
         "command": "ssh -N -L 3000:localhost:3000 root@srv27.mikr.us -p 10258"

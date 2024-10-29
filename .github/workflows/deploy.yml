@@ -28,7 +28,7 @@ jobs:
       # Build and push the Docker image for the API (Express.js)
       - name: Build and push API image
         run: |
-          docker build --no-cache -t ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-api.dev -f Dockerfile-api .
+          docker build --no-cache --platform=linux/amd64  -t ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-api.dev -f Dockerfile-api .
           docker push ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-api.dev
 
       # Build and push the Docker image for the Client (Angular)
