@@ -1,0 +1,46 @@
+@use 'variables/colors' as *;
+
+@mixin inputReset {
+  outline: none;
+  border: none;
+}
+
+@mixin typography {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+$radiusValue: 20px;
+
+:host {
+  display: block;
+  padding: 5px;
+  position: relative;
+
+  border: 2px solid $primary;
+  border-radius: $radiusValue;
+
+  .input {
+    width: 100%;
+    border-radius: $radiusValue;
+
+    @include inputReset;
+    @include typography;
+  }
+
+  .placeholder {
+    padding: 0 5px;
+
+    position: absolute;
+    left: 0;
+
+    transition: all 500ms;
+    @include typography;
+
+    &--active {
+      top: -5px;
+      left: 10px;
+      background: white;
+    }
+  }
+}

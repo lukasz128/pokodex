@@ -1,0 +1,12 @@
+<input
+  [type]="type()"
+  class="input"
+  [value]="value"
+  #ref
+  (input)="setInput(ref.value)"
+/>
+<span
+  class="placeholder"
+  [class.placeholder--active]="!!value || (isActivePlaceholder$ | async)"
+  >{{ placeholder() }}</span
+>

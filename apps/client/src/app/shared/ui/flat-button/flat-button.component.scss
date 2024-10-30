@@ -1,0 +1,27 @@
+@use 'variables/colors' as *;
+@use 'variables/typography' as *;
+
+@mixin resetButton {
+  outline: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+:host {
+  display: block;
+
+  @include resetButton;
+
+  padding: 7.5px 40px;
+  border-radius: 10px;
+}
+
+:host-context(.--primary) {
+  background-color: $primary;
+  color: $white;
+}
+
+:host-context(.--accent) {
+  background-color: $accent;
+}

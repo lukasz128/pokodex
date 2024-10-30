@@ -1,2 +1,17 @@
-<p>login-page works! :D:D:D:D</p>
-{{ test | async | json }}
+<app-header [showMenu]="false" />
+<img
+  ngSrc="assets/images/greeting-pikachu.png"
+  width="253"
+  height="264"
+  priority
+  class="pikachu"
+/>
+
+<section class="form-container">
+  <header class="form-container__header">
+    <h2 class="form-container__title">{{ 'Welcome Back!' | uppercase }}</h2>
+    <p class="form-container__description">Login in to your account</p>
+  </header>
+
+  <app-login-form />
+</section>

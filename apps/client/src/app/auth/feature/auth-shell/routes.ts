@@ -25,6 +25,9 @@ export default [
             (c) => c.RegisterPageComponent,
           ),
       },
+      // {
+      //   path: 'forgot-password',
+      // },
     ],
   },
 ] satisfies Route[];

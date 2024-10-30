@@ -1,0 +1,21 @@
+<form class="login-form" [formGroup]="formGroup">
+  <div class="login-form__inputs-container">
+    <app-input
+      formControlName="username"
+      placeholder="Username"
+      class="login-form__input"
+    />
+    <app-input
+      formControlName="password"
+      type="password"
+      placeholder="Password"
+      class="login-form__input"
+    />
+
+    <a class="login-form__forgot-password-link" routerLink="../forgot-password"
+      >Forgot password?</a
+    >
+  </div>
+
+  <button type="submit" class="login-form__btn" app-flat-button>Login</button>
+</form>
