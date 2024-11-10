@@ -5,16 +5,19 @@
       placeholder="Username"
       class="login-form__input"
     />
-    <app-input
+    <app-password-input
       formControlName="password"
-      type="password"
       placeholder="Password"
       class="login-form__input"
     />
 
-    <a class="login-form__forgot-password-link" routerLink="../forgot-password"
-      >Forgot password?</a
-    >
+    <div class="login-form__forgot-password-link-container">
+      <a
+        class="login-form__forgot-password-link"
+        routerLink="../forgot-password"
+        >Forgot password?
+      </a>
+    </div>
   </div>
 
   <button type="submit" class="login-form__btn" app-flat-button>Login</button>

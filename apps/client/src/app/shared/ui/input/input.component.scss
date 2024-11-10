@@ -5,8 +5,9 @@
   border: none;
 }
 
-@mixin typography {
+@mixin placeholderTypography {
   font-size: 16px;
+  font-weight: 400;
   line-height: 20px;
 }
 
@@ -14,7 +15,8 @@ $radiusValue: 20px;
 
 :host {
   display: block;
-  padding: 5px;
+  width: 100%;
+  padding: 6px 10px;
   position: relative;
 
   border: 2px solid $primary;
@@ -25,22 +27,48 @@ $radiusValue: 20px;
     border-radius: $radiusValue;
 
     @include inputReset;
-    @include typography;
+    @include placeholderTypography;
+
+    &--with-prefix-icon {
+      width: 90%;
+    }
   }
 
   .placeholder {
-    padding: 0 5px;
+    padding: 0 11px;
 
     position: absolute;
     left: 0;
 
-    transition: all 500ms;
-    @include typography;
+    transition: position 500ms linear;
+    @include placeholderTypography;
 
     &--active {
-      top: -5px;
-      left: 10px;
+      padding: 0 5px;
+      top: -11px;
+      left: 15px;
       background: white;
+
+      color: getPrimary();
+      font-weight: 300;
+      font-size: 12px;
+      line-height: auto;
     }
   }
+
+  .prefix-icon {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+  }
+
+  .prefix-icon-outside-border {
+    position: absolute;
+    right: -30px;
+    top: 6px;
+  }
+}
+
+:host-context(.--with-prefix-icon-outside-border) {
+  width: 95%;
 }

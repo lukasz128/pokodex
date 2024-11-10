@@ -1,6 +1,7 @@
 import {
   AbstractControl,
   ControlValueAccessor,
+  FormControl,
   NgControl,
 } from '@angular/forms';
 // import { ErrorMessages, getErrorMessage } from './get-error-message.base';
@@ -57,6 +58,10 @@ export abstract class ValueAccessorBase<T> implements ControlValueAccessor {
 
   get parentForm(): AbstractControl | null {
     return this.ngControl?.control?.root ?? null;
+  }
+
+  get control(): FormControl<T> | null {
+    return this.ngControl.control as FormControl<T>;
   }
 
   get isInvalid(): boolean {

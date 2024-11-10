@@ -1,0 +1,6 @@
+import { Icon } from './custom-icon.base';
+
+export const icons: Icon[] = [
+  { name: 'visibility', path: 'assets/icons/visibility.svg' },
+  { name: 'visibility_off', path: 'assets/icons/visibility_off.svg' },
+];

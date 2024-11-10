@@ -8,6 +8,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { FlatButtonComponent } from 'src/app/shared/ui/flat-button/flat-button.component';
 import { InputComponent } from 'src/app/shared/ui/input/input.component';
+import { PasswordInputComponent } from 'src/app/shared/ui/password-input/password-input.component';
 
 type LoginForm = {
   username: string;
@@ -36,6 +37,7 @@ const loginForm = {
     FlatButtonComponent,
     RouterModule,
     InputComponent,
+    PasswordInputComponent,
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',

@@ -1,3 +1,5 @@
+@use 'variables/colors' as *;
+
 :host {
   display: flex;
   flex-direction: column;
@@ -29,6 +31,16 @@
 
     &__forgot-password-link {
       text-align: right;
+
+      font-weight: 500;
+      font-size: 14px;
+      color: getPrimary();
+      text-decoration: none;
+
+      &-container {
+        display: flex;
+        justify-content: flex-end;
+      }
     }
   }
 }
