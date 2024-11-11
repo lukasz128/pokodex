@@ -1,1 +1,17 @@
-<p>register-page works!</p>
+<app-header [showMenu]="false" />
+
+<img
+  ngSrc="assets/images/greeting-pikachu.png"
+  width="253"
+  height="264"
+  priority
+  class="pikachu"
+/>
+
+<app-auth-form-section
+  title="Sign up to get started"
+  description="Enter the world pokemon trainers"
+  [isBrown]="true"
+>
+  <app-register-form />
+</app-auth-form-section>

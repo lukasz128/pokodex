@@ -1,0 +1,15 @@
+@use 'variables/colors';
+
+:host {
+  display: block;
+  height: 100svh;
+
+  background-color: colors.$white;
+  position: relative;
+
+  .pikachu {
+    display: block;
+    margin: 0 auto;
+    margin-top: 75px;
+  }
+}

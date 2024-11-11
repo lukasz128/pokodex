@@ -1,4 +1,4 @@
-import { AsyncPipe, JsonPipe, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -20,15 +20,18 @@ import { fromEvent, map, merge, mergeMap } from 'rxjs';
 import { ValueAccessorBase } from '../../data-access/value-accestor.base';
 
 type InputValue = string | number | null;
-export type InputType = 'text' | 'password' | 'search';
+export type InputType = 'text' | 'password' | 'search' | 'email';
 
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe, MatIconModule, NgTemplateOutlet],
+  imports: [AsyncPipe, MatIconModule, NgTemplateOutlet],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.--brown]': `color() === 'brown'`,
+  },
 })
 export class InputComponent
   extends ValueAccessorBase<InputValue>
@@ -58,6 +61,7 @@ export class InputComponent
 
   readonly type = input<InputType>('text');
   readonly placeholder = input<string>('');
+  readonly color = input<'brown' | 'white'>('white');
 
   @HostListener('click') clickHandler() {
     this._inputRef()?.nativeElement.focus();

@@ -1,9 +1,5 @@
 @use 'variables/colors' as *;
-
-@mixin inputReset {
-  outline: none;
-  border: none;
-}
+@use 'mixins/core' as *;
 
 @mixin placeholderTypography {
   font-size: 16px;
@@ -39,6 +35,7 @@ $radiusValue: 20px;
 
     position: absolute;
     left: 0;
+    top: 10px;
 
     transition: position 500ms linear;
     @include placeholderTypography;
@@ -59,16 +56,33 @@ $radiusValue: 20px;
   .prefix-icon {
     position: absolute;
     right: 6px;
-    top: 6px;
+    top: 10px;
   }
 
   .prefix-icon-outside-border {
     position: absolute;
     right: -30px;
-    top: 6px;
+    top: 10px;
   }
 }
 
 :host-context(.--with-prefix-icon-outside-border) {
   width: 95%;
+}
+
+:host-context(.--brown) {
+  border-color: $white;
+
+  .input {
+    background-color: $primary;
+    color: $white;
+  }
+
+  .placeholder {
+    color: $white;
+    &--active {
+      background-color: $primary;
+      color: $white;
+    }
+  }
 }

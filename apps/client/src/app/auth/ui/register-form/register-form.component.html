@@ -1,0 +1,32 @@
+<form class="login-form" [formGroup]="formGroup">
+  <div class="login-form__inputs-container">
+    <app-input
+      formControlName="username"
+      placeholder="Username"
+      class="login-form__input"
+      color="brown"
+    />
+    <app-input
+      formControlName="email"
+      placeholder="Email"
+      type="email"
+      class="login-form__input"
+      color="brown"
+    />
+    <app-password-input
+      formControlName="password"
+      placeholder="Password"
+      class="login-form__input"
+    />
+
+    <app-password-input
+      formControlName="confirmPassword"
+      placeholder="Confirm password"
+      class="login-form__input"
+    />
+  </div>
+
+  <button type="submit" class="login-form__btn" app-flat-button>
+    Register
+  </button>
+</form>

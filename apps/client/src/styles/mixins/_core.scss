@@ -4,3 +4,8 @@
   margin: 0;
   border: none;
 }
+
+@mixin inputReset {
+  outline: none;
+  border: none;
+}

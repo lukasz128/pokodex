@@ -6,6 +6,7 @@
     "start": "npx nx run-many -t serve -p client api",
     "start:api": "npx nx run api:serve",
     "start:client": "npx nx run client:serve",
+    "start:hosted-client": "npx nx run client:serve --host",
     "build:api": "npx nx run api:build --skip-nx-cache",
     "build:client": "npx nx run client:build"
   },
