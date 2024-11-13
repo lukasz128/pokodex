@@ -1,5 +1,10 @@
 <app-header [showMenu]="false" />
 
+<a routerLink="../login" class="link-to-login-page">
+  <mat-icon svgIcon="chevron_backward" />
+  <span class="link-to-login-page__text">login</span>
+</a>
+
 <img
   ngSrc="assets/images/greeting-pikachu.png"
   width="253"
@@ -13,5 +18,5 @@
   description="Enter the world pokemon trainers"
   [isBrown]="true"
 >
-  <app-register-form />
+  <app-register-form (register)="registerUser($event)" />
 </app-auth-form-section>

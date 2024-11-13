@@ -75,11 +75,11 @@ $radiusValue: 20px;
 
   .input {
     background-color: $primary;
-    color: $white;
+    color: getPrimary(50);
   }
 
   .placeholder {
-    color: $white;
+    color: getPrimary(50);
     &--active {
       background-color: $primary;
       color: $white;

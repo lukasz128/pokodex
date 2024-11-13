@@ -26,9 +26,13 @@ type InputValue = string | null;
   templateUrl: './password-input.component.html',
   styleUrl: './password-input.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.--white]': `color() === 'brown'`,
+  },
 })
 export class PasswordInputComponent extends ValueAccessorBase<InputValue> {
   protected readonly isVisibleText = signal<boolean>(false);
+  readonly color = input<'brown' | 'white'>('brown');
 
   readonly placeholder = input<string>('');
 

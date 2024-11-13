@@ -19,3 +19,8 @@
 :host-context(.--accent) {
   background-color: $accent;
 }
+
+:host-context(.--white) {
+  background-color: $white;
+  color: $primary;
+}
