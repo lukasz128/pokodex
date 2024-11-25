@@ -12,8 +12,8 @@
 }
 
 :host-context(.--primary) {
-  background-color: $primary;
-  color: $white;
+  background-color: $primary !important;
+  color: $white !important;
 }
 
 :host-context(.--accent) {

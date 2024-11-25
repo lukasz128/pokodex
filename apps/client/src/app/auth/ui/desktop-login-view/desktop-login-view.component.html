@@ -1,0 +1,26 @@
+<div class="modal">
+  <div class="modal__image-container">
+    <h1 class="modal__title">Hello pokemon trainer</h1>
+
+    <img
+      ngSrc="assets/images/xl-greeting-pikachu.png"
+      priority
+      fill
+      class="pikachu"
+    />
+  </div>
+
+  <app-desktop-auth-form-section
+    class="modal__main-section"
+    title="Welcome back!"
+    description="Login in to your account"
+    [isWhite]="true"
+  >
+    <app-login-form class="modal__form" />
+
+    <footer class="modal__footer">
+      <span>Don't have account?</span>
+      <a routerLink="../register">Sign up</a>
+    </footer>
+  </app-desktop-auth-form-section>
+</div>

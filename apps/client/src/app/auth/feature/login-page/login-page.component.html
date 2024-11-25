@@ -1,21 +1,5 @@
-<app-header [showMenu]="false" />
-
-<img
-  ngSrc="assets/images/greeting-pikachu.png"
-  width="253"
-  height="264"
-  priority
-  class="pikachu"
-/>
-
-<app-auth-form-section
-  [title]="'Welcome Back!' | uppercase"
-  description="Login in to your account"
->
-  <app-login-form />
-
-  <footer class="footer">
-    <span>Don't have account?</span>
-    <a routerLink="../register">Sign up</a>
-  </footer>
-</app-auth-form-section>
+@if (isDesktop()) {
+  <app-desktop-login-view />
+} @else {
+  <app-mobile-login-view />
+}

@@ -68,7 +68,7 @@ export class InputComponent
   }
 
   @HostBinding('class.--with-prefix-icon-outside-border')
-  get isPrefixIconOutsideBorderAvaiable(): boolean {
+  get isPrefixIconOutsideBorderAvailable(): boolean {
     return !!this.prefixIconOutsideBorder();
   }
 

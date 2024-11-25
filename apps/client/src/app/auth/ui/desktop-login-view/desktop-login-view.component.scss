@@ -1,0 +1,86 @@
+@use 'variables/colors';
+
+:host {
+  display: flex;
+  height: 100%;
+  background-color: colors.getPrimary(800);
+
+  .pikachu {
+    max-width: 428px;
+    max-height: 428px;
+
+    object-fit: contain;
+    position: inherit !important;
+  }
+
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    max-width: 1300px;
+    position: relative;
+
+    height: 80svh;
+    width: 90svw;
+    box-shadow: 2px 4px 2px -2px rgba(0, 0, 0, 0.25);
+
+    &__image-container {
+      $bgColor: colors.getPrimary(700);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+
+      background-color: $bgColor;
+
+      flex: 1;
+      height: 100%;
+
+      &::after {
+        content: '';
+        background-color: $bgColor;
+        height: 100%;
+        width: 100px;
+
+        position: absolute;
+        right: -100px;
+        z-index: 1;
+      }
+    }
+
+    &__title {
+      font-size: 45px;
+      font-weight: bold;
+      color: colors.$white;
+
+      margin: 0 20px;
+      text-align: center;
+    }
+
+    &__main-section {
+      z-index: 2;
+    }
+
+    &__form {
+      height: auto;
+    }
+
+    &__footer {
+      text-align: center;
+
+      font-size: 1.4rem;
+      font-weight: 500;
+
+      & a {
+        color: colors.getPrimary();
+        font-weight: 800;
+        padding-left: 5px;
+        text-decoration: none;
+      }
+    }
+  }
+}

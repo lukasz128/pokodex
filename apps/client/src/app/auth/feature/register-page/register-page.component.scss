@@ -1,38 +1,6 @@
-@use 'variables/colors';
+@use 'mixins/breakpoints';
 
 :host {
   display: block;
   height: 100svh;
-
-  background-color: colors.$white;
-  position: relative;
-
-  .pikachu {
-    display: block;
-    margin: 0 auto;
-    margin-top: 75px;
-  }
-
-  .link-to-login-page {
-    position: absolute;
-    top: 90px;
-    left: 15px;
-
-    text-decoration: none;
-
-    display: flex;
-    align-items: center;
-    gap: 5px;
-
-    & > .mat-icon {
-      width: 8px;
-      height: 12px;
-    }
-
-    &__text {
-      color: colors.getPrimary();
-      font-size: 1.4rem;
-      font-weight: 500;
-    }
-  }
 }
