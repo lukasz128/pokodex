@@ -22,7 +22,8 @@
     color: colors.$white;
 
     &__title {
-      font-size: 30px;
+      // NOTE (Fere) think about _typography.scss file
+      font-size: 3rem;
       font-weight: bold;
       margin-bottom: 10px;
     }

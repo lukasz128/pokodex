@@ -113,14 +113,7 @@
         "compodoc": false,
         "stylePreprocessorOptions": {
           "includePaths": ["apps/client/src/styles"]
-        },
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/client/src/assets/icons",
-            "output": "assets"
-          }
-        ]
+        }
       },
       "configurations": {
         "ci": {

@@ -1,4 +1,5 @@
 @use 'variables/colors';
+@use '../../utils/style/desktop-register-modal' as modal;
 
 :host {
   display: flex;
@@ -14,16 +15,7 @@
   }
 
   .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    max-width: 1300px;
-    position: relative;
-
-    height: 80svh;
-    width: 90svw;
-    box-shadow: 2px 4px 2px -2px rgba(0, 0, 0, 0.25);
+    @include modal.registerModal;
 
     &__image-container {
       display: flex;
@@ -52,7 +44,6 @@
       align-items: center;
       gap: 15px;
 
-      text-decoration: none;
       width: fit-content;
 
       &__text {
