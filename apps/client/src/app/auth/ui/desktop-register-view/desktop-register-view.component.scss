@@ -1,0 +1,65 @@
+@use 'variables/colors';
+@use '../../utils/style/desktop-register-modal' as modal;
+
+:host {
+  display: flex;
+  height: 100%;
+  background-color: colors.$white;
+
+  .pikachu {
+    max-width: 428px;
+    max-height: 428px;
+
+    object-fit: contain;
+    position: inherit !important;
+  }
+
+  .modal {
+    @include modal.registerModal;
+
+    &__image-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+
+      background-color: colors.$white;
+
+      flex: 1;
+      height: 100%;
+    }
+
+    &__title {
+      font-size: 45px;
+      font-weight: bold;
+      color: colors.getPrimary(700);
+
+      margin: 0 20px;
+      text-align: center;
+    }
+
+    &__link-to-login-page {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      width: fit-content;
+
+      &__text {
+        color: colors.$white;
+        font-size: 18px;
+      }
+
+      &__icon {
+        color: colors.getPrimary(50);
+        width: 15px;
+        height: 15px;
+      }
+    }
+
+    &__form {
+      height: auto;
+    }
+  }
+}

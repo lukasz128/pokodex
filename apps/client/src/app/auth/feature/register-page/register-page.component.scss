@@ -1,0 +1,6 @@
+@use 'mixins/breakpoints';
+
+:host {
+  display: block;
+  height: 100svh;
+}

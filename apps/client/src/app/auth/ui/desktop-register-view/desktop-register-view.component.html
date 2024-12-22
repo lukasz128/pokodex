@@ -1,0 +1,29 @@
+<div class="modal">
+  <div class="modal__image-container">
+    <h1 class="modal__title">Hello pokemon trainer</h1>
+
+    <img
+      ngSrc="assets/images/xl-greeting-pikachu.png"
+      priority
+      fill
+      class="pikachu"
+    />
+  </div>
+
+  <app-desktop-auth-form-section
+    title="Sing up to get started"
+    description="Enter the world pokemon trainers"
+  >
+    <ng-container upper-header-content>
+      <a routerLink="../login" class="modal__link-to-login-page">
+        <mat-icon
+          class="modal__link-to-login-page__icon"
+          svgIcon="chevron_backward"
+        />
+        <span class="modal__link-to-login-page__text">Back to login</span>
+      </a>
+    </ng-container>
+
+    <app-register-form class="modal__form" />
+  </app-desktop-auth-form-section>
+</div>

@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $white: #fff;
 $black: #000;
 
@@ -36,3 +38,22 @@ $accentColorContrast: (
   dark: #000,
   light: #fff,
 );
+
+@function -getColor($palette, $hue) {
+  @if (map.has-key($palette, $hue)) {
+    @return map.get($palette, $hue);
+  }
+
+  @error "Property #{$hue} doesn't exists in #{$palette}";
+}
+
+@function getPrimary($hue: 500) {
+  @return -getColor($primaryColor, $hue);
+}
+
+@function getAccent($hue: 500) {
+  @return -getColor($accentColor, $hue);
+}
+
+$primary: getPrimary();
+$accent: getAccent();

@@ -1,0 +1,25 @@
+<input
+  class="input"
+  [type]="type()"
+  [value]="value"
+  [class.input--with-prefix-icon]="prefixIcon() !== undefined"
+  #inputRef
+  (input)="setInput(inputRef.value)"
+/>
+<span
+  class="placeholder"
+  #labelRef
+  [class.placeholder--active]="!!value || (isActivePlaceholder$ | async)"
+  >{{ placeholder() }}</span
+>
+@if (prefixIcon(); as prefixIcon) {
+  <div class="prefix-icon" (click)="$event.stopPropagation()">
+    <ng-container *ngTemplateOutlet="prefixIcon"></ng-container>
+  </div>
+}
+
+@if (prefixIconOutsideBorder(); as prefixIconOutsideBorder) {
+  <div class="prefix-icon-outside-border" (click)="$event.stopPropagation()">
+    <ng-container *ngTemplateOutlet="prefixIconOutsideBorder"></ng-container>
+  </div>
+}

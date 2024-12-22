@@ -1,0 +1,88 @@
+@use 'variables/colors' as *;
+@use 'mixins/core' as *;
+
+@mixin placeholderTypography {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+$radiusValue: 20px;
+
+:host {
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  position: relative;
+
+  border: 2px solid $primary;
+  border-radius: $radiusValue;
+
+  .input {
+    width: 100%;
+    border-radius: $radiusValue;
+
+    @include inputReset;
+    @include placeholderTypography;
+
+    &--with-prefix-icon {
+      width: 90%;
+    }
+  }
+
+  .placeholder {
+    padding: 0 11px;
+
+    position: absolute;
+    left: 0;
+    top: 10px;
+
+    transition: position 500ms linear;
+    @include placeholderTypography;
+
+    &--active {
+      padding: 0 5px;
+      top: -11px;
+      left: 15px;
+      background: white;
+
+      color: getPrimary();
+      font-weight: 300;
+      font-size: 12px;
+      line-height: auto;
+    }
+  }
+
+  .prefix-icon {
+    position: absolute;
+    right: 6px;
+    top: 10px;
+  }
+
+  .prefix-icon-outside-border {
+    position: absolute;
+    right: -30px;
+    top: 10px;
+  }
+}
+
+:host-context(.--with-prefix-icon-outside-border) {
+  width: 95%;
+}
+
+:host-context(.--brown) {
+  border-color: $white;
+
+  .input {
+    background-color: transparent;
+    color: getPrimary(50);
+  }
+
+  .placeholder {
+    color: getPrimary(50);
+    &--active {
+      background-color: $primary;
+      color: $white;
+    }
+  }
+}

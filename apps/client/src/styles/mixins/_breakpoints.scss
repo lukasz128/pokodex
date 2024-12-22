@@ -1,0 +1,7 @@
+$md: 760px;
+
+@mixin desktop {
+  @media screen  and (min-width: #{$md}) {
+    @content;
+  }
+}

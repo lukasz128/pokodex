@@ -1,2 +1,5 @@
-<p>login-page works! :D:D:D:D</p>
-{{ test | async | json }}
+@if (isDesktop()) {
+  <app-desktop-login-view />
+} @else {
+  <app-mobile-login-view />
+}

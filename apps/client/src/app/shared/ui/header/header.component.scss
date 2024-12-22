@@ -1,0 +1,25 @@
+@use 'variables/colors';
+
+:host {
+  display: block;
+  background-color: colors.getPrimary(800);
+  padding: 10px;
+
+  .logo {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    &__logomark {
+      object-fit: contain;
+    }
+
+    &__logotype {
+      font-family: 'Inknut Antiqua';
+      font-size: 16px;
+      color: colors.$white;
+    }
+  }
+}

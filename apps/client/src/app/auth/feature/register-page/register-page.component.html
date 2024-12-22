@@ -1,1 +1,5 @@
-<p>register-page works!</p>
+@if (isDesktop()) {
+  <app-desktop-register-view />
+} @else {
+  <app-mobile-register-view />
+}

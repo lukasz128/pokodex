@@ -1,0 +1,48 @@
+@use 'variables/colors';
+
+:host {
+  display: block;
+  flex: 1;
+  height: 100%;
+
+  background-color: colors.getPrimary(700);
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+
+  .content {
+    height: 100%;
+    margin: auto 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .header {
+    color: colors.$white;
+
+    &__title {
+      // NOTE (Fere) think about _typography.scss file
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    &__description {
+      font-size: 20px;
+      font-weight: medium;
+    }
+  }
+}
+
+:host-context(.--white) {
+  background-color: colors.$white;
+
+  .header {
+    color: colors.getPrimary(700);
+
+    &__description {
+      color: #141414;
+    }
+  }
+}
