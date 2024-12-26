@@ -1,1 +1,13 @@
 port=3333
+
+# Database
+dbHost=hostExample
+dbPort=portExample // could be undefined
+dbUsername=usernameExample
+dbPassword=passwordExample
+dbName=nameExample
+
+
+# Auth
+TOKEN_SECRET=tokenSecretExample
+REFRESH_TOKEN_SECRET=refreshTokenSecretExample

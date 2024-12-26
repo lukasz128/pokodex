@@ -8,7 +8,8 @@
     "start:client": "npx nx run client:serve",
     "start:hosted-client": "npx nx run client:serve --host 0.0.0.0",
     "build:api": "npx nx run api:build --skip-nx-cache",
-    "build:client": "npx nx run client:build"
+    "build:client": "npx nx run client:build",
+    "typeorm": "typeorm-ts-node-commonjs"
   },
   "private": true,
   "dependencies": {
@@ -25,13 +26,14 @@
     "axios": "^1.6.0",
     "cors": "^2.8.5",
     "express": "^4.18.1",
+    "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "reflect-metadata": "^0.2.2",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "typeorm": "^0.3.20",
+    "typeorm": "0.3.20",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
@@ -71,7 +73,7 @@
     "@swc/core": "1.5.7",
     "@swc/helpers": "0.5.12",
     "@types/jest": "^29.4.0",
-    "@types/node": "^18.16.9",
+    "@types/node": "^16.11.10",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "@typescript-eslint/utils": "^7.16.0",
@@ -87,7 +89,7 @@
     "react-refresh": "^0.10.0",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
-    "typescript": "5.5.4",
+    "typescript": "4.5.2",
     "url-loader": "^4.1.1",
     "webpack-cli": "^5.1.4"
   }
