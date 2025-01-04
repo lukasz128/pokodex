@@ -1,6 +1,9 @@
+import { authenticate } from '../../../middleware/authentication';
+import { BaseController, Get } from '../../../shared/base-controller';
 import { LoginService } from '../services/login-service';
 
-export class LoginController {
+class LoginController extends BaseController {
+  @Get('/login', [authenticate])
   async login(req, res, next) {
     try {
       const userEntity = await new LoginService().login(req.body);
@@ -10,3 +13,5 @@ export class LoginController {
     }
   }
 }
+
+export const loginController = new LoginController();

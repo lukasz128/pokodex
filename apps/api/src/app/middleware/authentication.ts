@@ -1,6 +1,11 @@
 import jwt, { Secret } from 'jsonwebtoken';
+import { RouterMiddleware } from '../shared/base-controller';
 
-export const authenticate = (req: any, res: any, next: any) => {
+export const authenticate: RouterMiddleware = (
+  req: any,
+  res: any,
+  next: any,
+) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
