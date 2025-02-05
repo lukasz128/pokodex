@@ -55,11 +55,6 @@ class BaseController {
   ) {
     const router: Router = express.Router();
 
-    router.use((req, res, next) => {
-      // #swagger.tags = ['Auth']
-      next();
-    });
-
     if (controller.constructor.routes) {
       controller.constructor.routes.forEach((route: RouteDefinition) => {
         router[route.method](

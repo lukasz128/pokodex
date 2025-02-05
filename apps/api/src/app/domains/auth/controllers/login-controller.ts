@@ -1,11 +1,12 @@
-import { authenticate } from '../../../middleware/authentication';
-import { BaseController, Get } from '../../../shared/base-controller';
+import { NextFunction, Request, Response } from 'express';
+import { BaseController, Post } from '../../../shared/base-controller';
 import { LoginService } from '../services/login-service';
 
 class LoginController extends BaseController {
-  @Get('/login', [authenticate])
-  async login(req, res, next) {
+  @Post('/login')
+  async login(req: Request, res: Response, next: NextFunction) {
     try {
+      console.log(req.body);
       const userEntity = await new LoginService().login(req.body);
       res.status(200).send(userEntity);
     } catch (err) {

@@ -1,9 +1,11 @@
 import { ExpressType } from '../../../main';
 import { BaseController } from '../../shared/base-controller';
 import { loginController } from './controllers/login-controller';
+import { registerController } from './controllers/register-controller';
 
-const registerLoginController = (app: ExpressType) => {
+const authController = (app: ExpressType) => {
   BaseController.registerRoutes(loginController, app);
+  BaseController.registerRoutes(registerController, app);
 };
 
-export { registerLoginController };
+export { authController };

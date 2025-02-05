@@ -5,11 +5,13 @@ import { Docs } from './docs-config';
 
 export class SwaggerUiExpressDocs implements Docs {
   initialize(router: ExpressType) {
-    router.use('/api/api-docs', swaggerUi.serve);
+    router.use('/api-docs', swaggerUi.serve);
     router.use(
-      '/api/api-docs/swagger.json',
+      '/api-docs/swagger.json',
       (_, res) => res.json(swaggerDocument) as any,
     );
-    router.get('/api/api-docs', swaggerUi.setup(swaggerDocument));
+    router.get('/api-docs', swaggerUi.setup(swaggerDocument));
+
+    console.log('✅ Swagger documentation initialized at /api-docs');
   }
 }

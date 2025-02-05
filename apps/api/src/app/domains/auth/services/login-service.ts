@@ -1,5 +1,6 @@
 import jwt, { Secret } from 'jsonwebtoken';
 import { db } from '../../../../main';
+import { CommonError } from '../../../middleware/error-handler';
 import { User } from '../models/User';
 
 type Credentials = {
@@ -12,13 +13,13 @@ export class LoginService {
     const userId = await this._checkIfUserExists(credentials);
 
     if (userId === null) {
-      throw new Error('Invalid credentials');
+      throw new CommonError('Invalid credentials', 403);
     }
 
     const accessToken = jwt.sign(
       { userId },
       process.env.TOKEN_SECRET as Secret,
-      { expireIn: 86400 },
+      { expiresIn: 86400 },
     );
 
     const refreshToken = jwt.sign(
@@ -31,11 +32,12 @@ export class LoginService {
   }
 
   private async _checkIfUserExists(credentials: Credentials) {
-    const manager = (await db).manager;
-    const user = await manager.findOneBy(User, {
+    const user = await db.manager.findOneBy(User, {
       userName: credentials.username,
     });
 
-    return user.password === credentials.password ? user.id : null;
+    console.log(await user);
+
+    return user?.password === credentials.password ? user.id : null;
   }
 }
