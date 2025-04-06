@@ -21,7 +21,7 @@ export const errorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  console.error(err.stack);
+  console.error(err.stack, err.message);
 
   const statusCode = err.status || INTERNAL_SERVER_ERROR.status;
 

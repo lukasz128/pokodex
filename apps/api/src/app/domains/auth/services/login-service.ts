@@ -33,10 +33,8 @@ export class LoginService {
 
   private async _checkIfUserExists(credentials: Credentials) {
     const user = await db.manager.findOneBy(User, {
-      userName: credentials.username,
+      username: credentials.username,
     });
-
-    console.log(await user);
 
     return user?.password === credentials.password ? user.id : null;
   }

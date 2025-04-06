@@ -5,6 +5,8 @@ import express, {
   Response,
   Router,
 } from 'express';
+import * as yup from 'yup';
+import { createValidationMiddleware } from '../middleware/validation';
 
 type HttpMethod = 'get' | 'post' | 'put' | 'delete';
 export type RouterMiddleware = (
@@ -13,12 +15,26 @@ export type RouterMiddleware = (
   next: NextFunction,
 ) => void;
 
+export type ValidationSchema = {
+  query?: yup.AnySchema;
+  body?: yup.AnySchema;
+  response?: yup.AnySchema;
+};
+
 type RouteDefinition = {
   method: HttpMethod;
   path: string;
   handler: string;
   middlewares: RouterMiddleware[];
+  validationSchema?: ValidationSchema;
 };
+
+type RouteConfig = Pick<RouteDefinition, 'middlewares' | 'validationSchema'>;
+
+const routeConfigDefaultValue: RouteConfig = {
+  middlewares: [],
+  validationSchema: undefined,
+} as const;
 
 interface ControllerClass {
   new (): any;
@@ -26,10 +42,22 @@ interface ControllerClass {
 }
 
 function createRouteDecorator(method: HttpMethod) {
-  return (path: string, middlewares: RouterMiddleware[] = []) =>
+  return (
+      path: string,
+      config: Partial<RouteConfig> = routeConfigDefaultValue,
+    ) =>
     (target: InstanceType<ControllerClass>, propertyKey: string | symbol) => {
+      const { middlewares, validationSchema } = {
+        ...routeConfigDefaultValue,
+        ...config,
+      };
+
       if (!target.constructor.routes) {
         target.constructor.routes = [];
+      }
+
+      if (validationSchema) {
+        middlewares.unshift(createValidationMiddleware(validationSchema));
       }
 
       target.constructor.routes.push({
@@ -37,6 +65,7 @@ function createRouteDecorator(method: HttpMethod) {
         path,
         handler: propertyKey as string,
         middlewares,
+        validationSchema,
       });
     };
 }
@@ -54,7 +83,6 @@ class BaseController {
     app: Application,
   ) {
     const router: Router = express.Router();
-
     if (controller.constructor.routes) {
       controller.constructor.routes.forEach((route: RouteDefinition) => {
         router[route.method](

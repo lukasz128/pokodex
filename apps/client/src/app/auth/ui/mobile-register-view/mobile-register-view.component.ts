@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {
-  RegisterForm,
-  RegisterFormComponent,
-} from '../register-form/register-form.component';
 import { NgOptimizedImage } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from 'src/app/shared/ui/header/header.component';
 import { AuthFormSectionComponent } from '../auth-form-section/auth-form-section.component';
+import {
+  RegisterForm,
+  RegisterFormComponent,
+} from '../register-form/register-form.component';
 
 @Component({
   selector: 'app-mobile-register-view',
@@ -25,7 +25,5 @@ import { AuthFormSectionComponent } from '../auth-form-section/auth-form-section
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MobileRegisterViewComponent {
-  protected registerUser(userData: RegisterForm) {
-    console.log(userData);
-  }
+  protected registerUser(userData: RegisterForm) {}
 }
