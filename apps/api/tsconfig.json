@@ -13,6 +13,10 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@app/*": ["apps/api/src/app/*"]
+    }
   }
 }
