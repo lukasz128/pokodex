@@ -1,26 +1,27 @@
 version: '3.8'
+
 services:
   api:
-    # build:
-    # context: .
-    # dockerfile: Dockerfile-api
+    build:
+      context: .
+      dockerfile: Dockerfile-api
     image: fere12815/pokodex-api.dev:latest
     ports:
       - '3000:3333'
     environment:
       - NODE_ENV=production
-    depends_on:
-      - client
     networks:
       - app-network
 
   client:
-    # build:
-    # context: .
-    # dockerfile: Dockerfile-client
+    build:
+      context: .
+      dockerfile: Dockerfile-client
     image: fere12815/pokodex-client.dev:latest
     ports:
       - '80:80'
+    depends_on:
+      - api
     networks:
       - app-network
 

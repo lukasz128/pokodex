@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { outputFromObservable } from '@angular/core/rxjs-interop';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  viewChild,
+} from '@angular/core';
+import { outputFromObservable, toObservable } from '@angular/core/rxjs-interop';
 import {
   FormControl,
   FormGroup,
@@ -8,15 +13,21 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { tap, map, filter } from 'rxjs';
+import {
+  catchError,
+  EMPTY,
+  filter,
+  fromEvent,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { FlatButtonComponent } from 'src/app/shared/ui/flat-button/flat-button.component';
 import { InputComponent } from 'src/app/shared/ui/input/input.component';
 import { PasswordInputComponent } from 'src/app/shared/ui/password-input/password-input.component';
+import { LoginCredentials } from '../../data-access/auth.models';
 
-type LoginForm = {
-  username: string;
-  password: string;
-};
+export type LoginForm = LoginCredentials;
 
 type LoginFormControls = {
   username: FormControl<string>;
@@ -56,16 +67,24 @@ const loginForm = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {
+  private readonly _form =
+    viewChild.required<ElementRef<HTMLFormElement>>('formRef');
+
   protected readonly formGroup = loginForm.build();
 
   readonly login = outputFromObservable(
-    this.formGroup.valueChanges.pipe(
-      tap(() => this.formGroup.markAllAsTouched()),
-      map((value) => {
-        return { value, isInvalid: this.formGroup.status === 'INVALID' };
-      }),
-      filter(({ isInvalid }) => !isInvalid),
-      map(({ value }) => value),
+    toObservable(this._form).pipe(
+      switchMap((form) =>
+        fromEvent(form.nativeElement, 'submit').pipe(
+          tap(() => this.formGroup.markAllAsTouched()),
+          filter(() => this.formGroup.status === 'VALID'),
+          map(() => this.formGroup.getRawValue()),
+          catchError((error) => {
+            console.error(error);
+            return EMPTY;
+          }),
+        ),
+      ),
     ),
   );
 }

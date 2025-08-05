@@ -1,8 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DesktopAuthFormSectionComponent } from '../desktop-auth-form-section/desktop-auth-form-section.component';
-import { LoginFormComponent } from '../login-form/login-form.component';
 import { NgOptimizedImage } from '@angular/common';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { DesktopAuthFormSectionComponent } from '../desktop-auth-form-section/desktop-auth-form-section.component';
+import {
+  LoginForm,
+  LoginFormComponent,
+} from '../login-form/login-form.component';
 
 @Component({
   selector: 'app-desktop-login-view',
@@ -17,4 +20,6 @@ import { RouterModule } from '@angular/router';
   styleUrl: './desktop-login-view.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DesktopLoginViewComponent {}
+export class DesktopLoginViewComponent {
+  readonly login = output<LoginForm>();
+}

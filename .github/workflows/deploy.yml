@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build and Deploy to VPS
 
 on:
   push:
@@ -10,85 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Set up Docker Buildx (optional, but useful for building multi-platform images)
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      # Log in to Docker Hub
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.VPS_DOCKER_USERNAME }}
-          password: ${{ secrets.VPS_DOCKER_PASSWORD }}
-
-      # Build and push the Docker image for the API (Express.js)
-      - name: Build and push API image
-        run: |
-          docker build --no-cache --platform=linux/amd64  -t ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-api.dev -f Dockerfile-api .
-          docker push ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-api.dev
-
-      # Build and push the Docker image for the Client (Angular)
-      - name: Build and push Client image
-        run: |
-          docker build --no-cache -t ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-client.dev -f Dockerfile-client .
-          docker push ${{ secrets.VPS_DOCKER_USERNAME }}/pokodex-client.dev
-
-      - name: 'Prepare file to SCP'
-        run: |
-          tar -cvf docker-compose.yml.tar docker-compose.yml
-
-      - name: 'Docker compose artifact'
-        uses: actions/upload-artifact@v4
-        with:
-          name: docker-compose-artifact
-          path: docker-compose.yml.tar
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Download docker-compose-artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: docker-compose-artifact
-      - name: 'SCP to vps'
-        uses: appleboy/scp-action@master
+      - name: Login to VPS
+        uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_SSH_HOST }}
           username: ${{ secrets.VPS_SSH_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{secrets.VPS_SSH_PORT }}
-          debug: true
-          source: 'docker-compose.yml.tar'
-          target: '~/'
-      # Deploy to VPS using appleboy/ssh-action
-      - name: Deploy to VPS
-        uses: appleboy/ssh-action@v0.1.6
-        with:
-          host: ${{ secrets.VPS_SSH_HOST }}
-          username: ${{ secrets.VPS_SSH_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_SSH_PORT }}
           script: |
-            # Login in to dockehub
-            docker login -p ${{ secrets.VPS_DOCKER_PASSWORD }} -u ${{secrets.VPS_DOCKER_USERNAME}}
-
-            #before docker-compose I need to place docker-compose.yml on vps
-            tar xvf docker-compose.yml.tar
-
-            # Stop and remove the current containers
+            git clone https://${{secrets.GIT_LOGIN}}:${{secrets.GIT_CREDENTIALS}}@github.com/lukasz128/pokodex.git
+            cd pokodex
+            git checkout main
+            git pull origin main
             docker compose down
-
-            # Pull the latest images from Docker Hub
             docker compose pull
-
-            # Start new containers with the latest images
             docker compose up -d
-
-            # Clean up docker-compose files
-            rm -rf docker-compose.yml docker-compose.yml.tar
+            cd ..
+            rm -rf pokodex

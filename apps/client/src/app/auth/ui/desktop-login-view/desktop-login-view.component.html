@@ -16,7 +16,7 @@
     description="Login in to your account"
     [isWhite]="true"
   >
-    <app-login-form class="modal__form" />
+    <app-login-form class="modal__form" (login)="login.emit($event)" />
 
     <footer class="modal__footer">
       <span>Don't have account?</span>
