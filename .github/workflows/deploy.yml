@@ -3,7 +3,7 @@ name: Build and Deploy to VPS
 on:
   push:
     branches:
-      - integration-auth-services # Trigger on push to the main branch
+      - main # Trigger on push to the main branch
 
 jobs:
   build:
@@ -23,8 +23,8 @@ jobs:
           script: |
             git clone https://${{secrets.GIT_LOGIN}}:${{secrets.GIT_CREDENTIALS}}@github.com/lukasz128/pokodex.git
             cd pokodex
-            git checkout integration-auth-services
-            git pull origin integration-auth-services
+            git checkout main
+            git pull origin main
             docker compose down
             docker compose pull
             docker compose up -d
