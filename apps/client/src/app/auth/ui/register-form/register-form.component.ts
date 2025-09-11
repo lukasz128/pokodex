@@ -8,9 +8,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { filter, map, tap } from 'rxjs';
-import { FlatButtonComponent } from 'src/app/shared/ui/flat-button/flat-button.component';
-import { InputComponent } from 'src/app/shared/ui/input/input.component';
-import { PasswordInputComponent } from 'src/app/shared/ui/password-input/password-input.component';
+import { FlatButtonComponent } from '../../../shared/ui/flat-button/flat-button.component';
+import { InputComponent } from '../../../shared/ui/input/input.component';
+import { PasswordInputComponent } from '../../../shared/ui/password-input/password-input.component';
 
 const registerForm = {
   build: () =>

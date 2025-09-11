@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { BreakpointsObserver } from 'src/app/shared/data-access/breakpoints-observer/breakpoints-observer';
+import { BreakpointsObserver } from '../../../shared/data-access/breakpoints-observer/breakpoints-observer';
 import { DesktopRegisterViewComponent } from '../../ui/desktop-register-view/desktop-register-view.component';
 import { MobileRegisterViewComponent } from '../../ui/mobile-register-view/mobile-register-view.component';
 

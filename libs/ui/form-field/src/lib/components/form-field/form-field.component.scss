@@ -1,0 +1,31 @@
+$radiusValue: 20px;
+$primary: #7e4343;
+
+@mixin inputReset {
+  outline: none;
+  border: none;
+}
+
+@mixin placeholderTypography {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.ui-form-field {
+  display: block;
+  width: 100%;
+}
+
+.ui-form-field--outline {
+  border: 1px solid $primary;
+  border-radius: $radiusValue;
+
+  & input[uiInput] {
+    color: black;
+    width: 100%;
+
+    @include inputReset;
+    @include placeholderTypography;
+  }
+}

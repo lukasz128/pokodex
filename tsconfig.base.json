@@ -13,9 +13,12 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": "/",
+    "baseUrl": ".",
     "paths": {
-      "@pokodex/interfaces": ["libs/interfaces/src/index.ts"]
+      "@pokodex/interfaces": ["libs/interfaces/src/index.ts"],
+      "@pokodex/ui": ["libs/ui/src/index.ts"],
+      "@pokodex/ui/common": ["libs/ui/common/src/index.ts"],
+      "@pokodex/ui/form-field": ["libs/ui/form-field/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
