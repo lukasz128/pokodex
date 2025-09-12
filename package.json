@@ -7,8 +7,10 @@
     "start:api": "node ./apps/api/swagger.js &&  npx nx run api:serve",
     "start:client": "npx nx run client:serve",
     "start:hosted-client": "npx nx run client:serve --host 0.0.0.0",
+    "start:ui": "npx nx run ui:serve-storybook",
     "build:api": "npx nx run api:build --skip-nx-cache",
     "build:client": "npx nx run client:build",
+    "build:ui": "npx nx run ui:build-storybook",
     "typeorm": "typeorm-ts-node-commonjs",
     "swagger": "node ./apps/api/swagger.js"
   },

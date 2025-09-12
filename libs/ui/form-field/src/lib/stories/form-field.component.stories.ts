@@ -1,3 +1,4 @@
+import { UiInputDirective } from '@pokodex/ui/input';
 import {
   applicationConfig,
   Meta,
@@ -12,7 +13,7 @@ export default {
   decorators: [
     applicationConfig({ providers: [] }),
     moduleMetadata({
-      imports: [UiFormFieldModule],
+      imports: [UiFormFieldModule, UiInputDirective],
     }),
   ],
 } as Meta<UiFormFieldComponent>;

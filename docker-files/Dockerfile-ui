@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install  --force
 COPY . .
-RUN nx run ui:build-storybook
+RUN npx nx run ui:build-storybook
 
 # Stage 2: Serve the Angular app with Nginx
 FROM nginx:alpine
