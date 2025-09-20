@@ -1,36 +1,36 @@
 version: '3.8'
 
 services:
-  # api:
-  #   build:
-  #     context: .
-  #     dockerfile: docker-files/Dockerfile-api
-  #   image: fere12815/pokodex-api.dev:latest
-  #   ports:
-  #     - '3000:3333'
-  #   environment:
-  #     - NODE_ENV=production
-  #   networks:
-  #     - app-network
-
-  # client:
-  #   build:
-  #     context: .
-  #     dockerfile: docker-files/Dockerfile-client
-  #   image: fere12815/pokodex-client.dev:latest
-  #   ports:
-  #     - '80:80'
-  #   depends_on:
-  #     - api
-  #   networks:
-  #     - app-network
-  ui:
+  api:
     build:
       context: .
-      dockerfile: docker-files/Dockerfile-ui
-    image: fere12815/pokodex-ui.dev:latest
+      dockerfile: docker-files/Dockerfile-api
+    image: fere12815/pokodex-api.dev:latest
     ports:
-      - '80:81'
+      - '3000:3333'
+    environment:
+      - NODE_ENV=production
+    networks:
+      - app-network
+
+  client:
+    build:
+      context: .
+      dockerfile: docker-files/Dockerfile-client
+    image: fere12815/pokodex-client.dev:latest
+    ports:
+      - '80:80'
+    depends_on:
+      - api
+    networks:
+      - app-network
+  # ui:
+  #   build:
+  #     context: .
+  #     dockerfile: docker-files/Dockerfile-ui
+  #   image: fere12815/pokodex-ui.dev:latest
+  #   ports:
+  #     - '80:81'
 
 networks:
   app-network:
