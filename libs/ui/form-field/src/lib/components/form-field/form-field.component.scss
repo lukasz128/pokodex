@@ -1,6 +1,11 @@
 $radiusValue: 20px;
 $primary: #7e4343;
 
+:root {
+  --defaultPrefixMargin: 10px;
+  --defaultSuffixMargin: 10px;
+}
+
 @mixin inputReset {
   outline: none;
   border: none;
@@ -15,17 +20,92 @@ $primary: #7e4343;
 .ui-form-field {
   display: block;
   width: 100%;
+
+  .content {
+    display: flex;
+    align-items: baseline;
+
+    position: relative;
+    width: 100%;
+  }
+
+  .input-content {
+    width: 100%;
+    position: relative;
+    padding-left: 10px;
+  }
 }
 
 .ui-form-field--outline {
-  border: 1px solid $primary;
-  border-radius: $radiusValue;
+  & .content {
+    border: 1px solid $primary;
+    border-radius: $radiusValue;
+
+    padding: 10px 0;
+  }
 
   & input[uiInput] {
     color: black;
     width: 100%;
+    border-radius: $radiusValue;
+    min-width: 150px;
 
     @include inputReset;
     @include placeholderTypography;
+  }
+
+  $leftShift: 10px;
+  .label {
+    background: white;
+    border-radius: $radiusValue;
+
+    width: 100%;
+
+    position: absolute;
+    left: 0;
+    top: 2px;
+
+    transition:
+      top 500ms,
+      left 500ms,
+      font-size 100ms,
+      color 100ms;
+    @include placeholderTypography;
+
+    &--active {
+      padding: 0 5px;
+      top: -21px;
+      left: 5px;
+      background: white;
+      width: auto;
+
+      color: $primary;
+      font-weight: 300;
+      font-size: 12px;
+      line-height: auto;
+    }
+  }
+
+  *[uiSuffix] > .label {
+    left: calc($leftShift + var(--defaultSuffixMargin) * 2);
+  }
+
+  *[uiPrefix] > .label {
+    $laa: calc(var(--defaultPrefixMargin) * 2);
+    width: calc(100% - $leftShift - $laa);
+  }
+
+  & *[uiSuffix] {
+    margin: 0 var(--defaultPrefixMargin);
+    flex-shrink: 0;
+
+    & + .input-content {
+      margin-left: 0;
+    }
+  }
+
+  & *[uiPrefix] {
+    margin: 0 var(--defaultPrefixMargin);
+    flex-shrink: 0;
   }
 }

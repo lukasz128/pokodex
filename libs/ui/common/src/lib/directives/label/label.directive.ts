@@ -1,4 +1,4 @@
-import { Directive, InjectionToken } from '@angular/core';
+import { Directive, ElementRef, inject, InjectionToken } from '@angular/core';
 
 export const LabelToken = new InjectionToken<LabelDirective>('LabelDirective');
 
@@ -7,4 +7,6 @@ export const LabelToken = new InjectionToken<LabelDirective>('LabelDirective');
   standalone: true,
   providers: [{ provide: LabelToken, useExisting: LabelDirective }],
 })
-export class LabelDirective {}
+export class LabelDirective {
+  readonly elementRef = inject(ElementRef);
+}

@@ -2,21 +2,27 @@ import {
   ChangeDetectionStrategy,
   Component,
   contentChild,
-  effect,
+  ElementRef,
   inject,
   InjectionToken,
   input,
+  viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { LabelDirective } from '@pokodex/ui/common';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { LabelDirective, ValueAccessorBase } from '@pokodex/ui/common';
+import { PrefixDirective } from 'libs/ui/common/src/lib/directives/prefix/prefix.directive';
+import { SuffixDirective } from 'libs/ui/common/src/lib/directives/suffix/suffix.directive';
+import { filter, fromEvent, map, merge, Observable, switchMap } from 'rxjs';
 
-export interface FormFieldContent {
-  placeholder: string;
+export interface FormFieldContent<TValue> extends ValueAccessorBase<TValue> {
+  focus$: Observable<Event>;
+  blur$: Observable<Event>;
 }
 
-export const formFieldContentToken = new InjectionToken<FormFieldContent>(
-  'FormFieldContent',
-);
+export const formFieldContentToken = new InjectionToken<
+  FormFieldContent<unknown>
+>('FormFieldContent');
 
 export type UiFormFieldAppearance = 'outline';
 
@@ -50,21 +56,68 @@ const AVAILABLE_FORMATS: AvailableFormat[] = [
   },
 })
 export class UiFormFieldComponent extends UiFormFieldOptions {
-  private readonly _content = inject(formFieldContentToken);
+  private readonly _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  private readonly _inputContentChild =
-    contentChild<HTMLInputElement>('input[uiInput]');
-  private readonly _selectContentChild = contentChild('[uiSelect]');
+  private readonly _content = contentChild(formFieldContentToken);
+  private readonly _content$ = toObservable(this._content).pipe(
+    filter(
+      (content): content is FormFieldContent<unknown> => content !== undefined,
+    ),
+  );
+
+  private readonly _labelRef = viewChild<ElementRef<HTMLElement>>('labelRef');
+
+  private readonly _contentEventsForPlaceholderListener$ = merge(
+    this._content$.pipe(
+      switchMap((content) => content.focus$),
+      map(() => true),
+    ),
+    this._content$.pipe(
+      switchMap((content) => content.blur$),
+      map(() => false),
+    ),
+  );
+
+  private readonly _placeholderClickListener$ = toObservable(
+    this._labelRef,
+  ).pipe(
+    filter(
+      (placeholder): placeholder is ElementRef<HTMLElement> =>
+        placeholder !== undefined,
+    ),
+    switchMap((placeholder) => fromEvent(placeholder.nativeElement, 'click')),
+    map(() => true),
+  );
+
+  private readonly _clickOutsideComponentListener$ = fromEvent<MouseEvent>(
+    this._elementRef.nativeElement,
+    'click',
+  ).pipe(
+    map((element) =>
+      this._elementRef.nativeElement.contains(element.target as Node),
+    ),
+  );
+
+  private readonly _isActiveLabel$ = merge(
+    this._contentEventsForPlaceholderListener$,
+    this._placeholderClickListener$,
+    this._clickOutsideComponentListener$,
+  ).pipe(
+    map((value) => {
+      const hasContentValue = !!this._content()?.value;
+      if (hasContentValue) return true;
+
+      return value;
+    }),
+  );
 
   readonly appearance = input<UiFormFieldAppearance>('outline');
 
-  protected readonly hasLabel = contentChild(LabelDirective);
+  protected readonly label = contentChild(LabelDirective);
+  protected readonly suffix = contentChild(SuffixDirective);
+  protected readonly prefix = contentChild(PrefixDirective);
 
-  protected readonly contentSelector = AVAILABLE_FORMATS[1]['selector'];
-
-  protected readonly placeholder = this._content.placeholder;
-
-  blee = effect(() => {
-    console.log(this._inputContentChild(), this.placeholder);
+  protected readonly isActiveLabel = toSignal(this._isActiveLabel$, {
+    initialValue: false,
   });
 }
