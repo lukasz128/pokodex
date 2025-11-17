@@ -4,7 +4,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: Dockerfile-api
+      dockerfile: docker-files/Dockerfile-api
     image: fere12815/pokodex-api.dev:latest
     ports:
       - '3000:3333'
@@ -16,7 +16,7 @@ services:
   client:
     build:
       context: .
-      dockerfile: Dockerfile-client
+      dockerfile: docker-files/Dockerfile-client
     image: fere12815/pokodex-client.dev:latest
     ports:
       - '80:80'
@@ -24,6 +24,13 @@ services:
       - api
     networks:
       - app-network
+  # ui:
+  #   build:
+  #     context: .
+  #     dockerfile: docker-files/Dockerfile-ui
+  #   image: fere12815/pokodex-ui.dev:latest
+  #   ports:
+  #     - '80:81'
 
 networks:
   app-network:

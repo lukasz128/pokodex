@@ -1,0 +1,19 @@
+<div class="content">
+  @if (suffix()) {
+    <ng-content select="[uiSuffix]" />
+  }
+
+  <div class="input-content">
+    <ng-content select="input[uiInput], [uiSelect]" />
+
+    @if (label()) {
+      <span #labelRef class="label" [class.label--active]="isActiveLabel()">
+        <ng-content select="[uiLabel]" />
+      </span>
+    }
+  </div>
+
+  @if (prefix()) {
+    <ng-content select="[uiPrefix]" />
+  }
+</div>

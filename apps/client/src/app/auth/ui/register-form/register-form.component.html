@@ -1,18 +1,17 @@
 <form class="login-form" [formGroup]="formGroup">
-  <div class="login-form__inputs-container">
-    <app-input
-      formControlName="username"
-      placeholder="Username"
-      class="login-form__input"
-      color="brown"
-    />
-    <app-input
-      formControlName="email"
-      placeholder="Email"
-      type="email"
-      class="login-form__input"
-      color="brown"
-    />
+  <div class="login-form__inputs-container" uiCanColor="brown">
+    <ui-form-field>
+      <label uiLabel>Username</label>
+
+      <input uiInput formControlName="username" class="login-form__input" />
+    </ui-form-field>
+
+    <ui-form-field>
+      <label uiLabel>Email</label>
+
+      <input uiInput formControlName="email" class="login-form__input" />
+    </ui-form-field>
+
     <app-password-input
       formControlName="password"
       placeholder="Password"
@@ -28,7 +27,7 @@
     />
   </div>
 
-  <button type="submit" class="login-form__btn" app-flat-button color="white">
+  <button type="submit" class="login-form__btn" ui-flat-btn color="white">
     Register
   </button>
 </form>

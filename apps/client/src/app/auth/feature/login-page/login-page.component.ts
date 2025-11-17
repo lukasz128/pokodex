@@ -10,8 +10,8 @@ import {
   takeUntilDestroyed,
   toObservable,
 } from '@angular/core/rxjs-interop';
+import { BreakpointsObserver } from '@pokodex/ui/layout';
 import { catchError, exhaustMap, filter, merge, of, switchMap } from 'rxjs';
-import { BreakpointsObserver } from 'src/app/shared/data-access/breakpoints-observer/breakpoints-observer';
 import { AuthService } from '../../services/auth/auth.service';
 import { DesktopLoginViewComponent } from '../../ui/desktop-login-view/desktop-login-view.component';
 import { MobileLoginViewComponent } from '../../ui/mobile-login-view/mobile-login-view.component';

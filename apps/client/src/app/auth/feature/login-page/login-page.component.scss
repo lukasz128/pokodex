@@ -1,10 +1,8 @@
-@use 'variables/colors';
-
 :host {
   display: block;
   height: 100svh;
 
-  background-color: colors.$white;
+  background-color: var(--ui-white);
   position: relative;
 
   .pikachu {
@@ -20,7 +18,7 @@
     font-weight: 500;
 
     & a {
-      color: colors.getPrimary();
+      color: var(--ui-primary);
       font-weight: 800;
       padding-left: 5px;
     }

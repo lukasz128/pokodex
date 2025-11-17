@@ -2,12 +2,12 @@ import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { HeaderComponent } from 'src/app/shared/ui/header/header.component';
 import { AuthFormSectionComponent } from '../auth-form-section/auth-form-section.component';
 import {
   RegisterForm,
   RegisterFormComponent,
 } from '../register-form/register-form.component';
+import { HeaderComponent } from '../../../shared/ui/header/header.component';
 
 @Component({
   selector: 'app-mobile-register-view',

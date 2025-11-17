@@ -1,8 +1,6 @@
-@use 'variables/colors';
-
 :host {
   display: block;
-  background-color: colors.getPrimary(800);
+  background-color: var(--ui-primary-800);
   padding: 10px;
 
   .logo {
@@ -19,7 +17,7 @@
     &__logotype {
       font-family: 'Inknut Antiqua';
       font-size: 16px;
-      color: colors.$white;
+      color: var(--ui-white);
     }
   }
 }

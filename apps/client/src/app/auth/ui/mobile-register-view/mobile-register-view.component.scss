@@ -1,11 +1,10 @@
-@use 'variables/colors';
 @use 'mixins/breakpoints';
 
 :host {
   display: block;
   height: 100svh;
 
-  background-color: colors.$white;
+  background-color: var(--ui-white);
   position: relative;
 
   .pikachu {
@@ -29,7 +28,7 @@
     }
 
     &__text {
-      color: colors.getPrimary();
+      color: var(--ui-primary);
       font-size: 1.4rem;
       font-weight: 500;
     }

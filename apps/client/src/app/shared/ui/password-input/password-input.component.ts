@@ -7,9 +7,10 @@ import {
 } from '@angular/core';
 import { FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { ValueAccessorBase } from '../../data-access/value-accestor.base';
-import { IconButtonComponent } from '../icon-button/icon-button.component';
-import { InputComponent } from '../input/input.component';
+import { UiIconButtonComponent } from '@pokodex/ui/button';
+import { ValueAccessorBase } from '@pokodex/ui/common';
+import { UiFormFieldModule } from '@pokodex/ui/form-field';
+import { UiInputDirective } from '@pokodex/ui/input';
 
 type InputValue = string | null;
 
@@ -17,11 +18,12 @@ type InputValue = string | null;
   selector: 'app-password-input',
   standalone: true,
   imports: [
-    InputComponent,
     MatIconModule,
-    IconButtonComponent,
     ReactiveFormsModule,
     FormsModule,
+    UiInputDirective,
+    UiFormFieldModule,
+    UiIconButtonComponent,
   ],
   templateUrl: './password-input.component.html',
   styleUrl: './password-input.component.scss',

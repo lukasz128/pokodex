@@ -1,0 +1,124 @@
+@use 'mixins/core' as *;
+
+$radiusValue: 20px;
+
+:root {
+  --defaultPrefixMargin: 10px;
+  --defaultSuffixMargin: 10px;
+}
+
+@mixin placeholderTypography {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.ui-form-field {
+  display: block;
+  width: 100%;
+
+  & > .content {
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    width: 100%;
+  }
+
+  .input-content {
+    width: 100%;
+    position: relative;
+    padding-left: 10px;
+  }
+}
+
+.ui-form-field--outline {
+  & > .content {
+    border: 1px solid var(--ui-primary);
+    border-radius: $radiusValue;
+
+    padding: 10px 0;
+  }
+
+  & input[uiInput] {
+    color: black;
+    width: 100%;
+    border-radius: $radiusValue;
+    min-width: 150px;
+
+    @include inputReset;
+    @include placeholderTypography;
+  }
+
+  $leftShift: 10px;
+  .label {
+    background: var(--ui-white);
+    border-radius: $radiusValue;
+
+    width: calc(100% - $leftShift);
+
+    position: absolute;
+    left: $leftShift;
+    top: 2px;
+
+    transition:
+      top 500ms,
+      left 500ms,
+      font-size 100ms,
+      color 100ms;
+    @include placeholderTypography;
+
+    &--active {
+      padding: 0 5px;
+      top: -21px;
+      left: 5px;
+      background: white;
+      width: auto;
+
+      color: var(--ui-primary-700);
+      font-weight: 300;
+      font-size: 12px;
+      line-height: auto;
+    }
+  }
+
+  &.--brown {
+    .label {
+      background: var(--ui-primary-700);
+      color: var(--ui-primary-50);
+    }
+
+    .content {
+      background: var(--ui-primary-700);
+      border-color: var(--ui-white);
+    }
+
+    input {
+      background: var(--ui-primary-700);
+      color: var(--ui-white);
+    }
+  }
+
+  *[uiSuffix] > .label {
+    left: calc($leftShift + var(--defaultSuffixMargin) * 2);
+  }
+
+  *[uiPrefix] > .label {
+    $prefixMargin: calc(var(--defaultPrefixMargin) * 2);
+    width: calc(100% - $leftShift - $prefixMargin);
+  }
+
+  & *[uiSuffix] {
+    margin: 0 var(--defaultPrefixMargin);
+    flex-shrink: 0;
+
+    & + .input-content {
+      margin-left: 0;
+    }
+  }
+
+  & *[uiPrefix] {
+    margin: 0 var(--defaultPrefixMargin);
+    flex-shrink: 0;
+  }
+}

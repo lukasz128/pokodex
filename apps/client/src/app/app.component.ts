@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { CustomIconBase } from './shared/data-access/custom-icon.base';
-import { icons } from './shared/data-access/icons';
+import { CustomIconBase, icons } from '@pokodex/ui';
 
 @Component({
   standalone: true,
@@ -13,10 +12,7 @@ import { icons } from './shared/data-access/icons';
   styleUrl: './app.component.scss',
 })
 export class AppComponent extends CustomIconBase {
-  constructor(
-    private readonly matIconRegistry: MatIconRegistry,
-    private readonly sanitizer: DomSanitizer,
-  ) {
-    super(matIconRegistry, sanitizer, icons);
+  constructor() {
+    super(inject(MatIconRegistry), inject(DomSanitizer), icons);
   }
 }

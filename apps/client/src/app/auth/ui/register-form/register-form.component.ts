@@ -7,10 +7,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { UiFlatButtonComponent } from '@pokodex/ui/button';
+import { UiFormFieldModule } from '@pokodex/ui/form-field';
+import { UiInputDirective } from '@pokodex/ui/input';
 import { filter, map, tap } from 'rxjs';
-import { FlatButtonComponent } from 'src/app/shared/ui/flat-button/flat-button.component';
-import { InputComponent } from 'src/app/shared/ui/input/input.component';
-import { PasswordInputComponent } from 'src/app/shared/ui/password-input/password-input.component';
+import { PasswordInputComponent } from '../../../shared/ui/password-input/password-input.component';
+import { CanColorDirective } from '@pokodex/ui/common';
 
 const registerForm = {
   build: () =>
@@ -46,9 +48,11 @@ export type RegisterForm = ReturnType<(typeof registerForm)['build']>['value'];
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    InputComponent,
     PasswordInputComponent,
-    FlatButtonComponent,
+    UiFlatButtonComponent,
+    UiFormFieldModule,
+    UiInputDirective,
+    CanColorDirective,
   ],
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.scss',
