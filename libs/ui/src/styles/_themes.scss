@@ -1,0 +1,26 @@
+@use './variables/colors';
+
+@mixin themeBuilder($palette, $palette-name) {
+  @if ($palette-name != '') {
+    @each $name, $color in $palette {
+      @if $name == 500 {
+        --ui-#{$palette-name}: #{$color};
+      }
+
+      --ui-#{$palette-name}-#{$name}: #{$color};
+    }
+  } @else {
+    @each $name, $color in $palette {
+      --ui-#{$name}: #{$color};
+    }
+  }
+}
+:root {
+  @include themeBuilder(colors.$primaryColor, 'primary');
+  @include themeBuilder(colors.$primaryColorContrast, 'primary-contrast');
+  @include themeBuilder(colors.$accentColor, 'accent');
+  @include themeBuilder(colors.$accentColorContrast, 'accent-contrast');
+
+  --ui-white: #{colors.$white};
+  --ui-black: #{colors.$black};
+}

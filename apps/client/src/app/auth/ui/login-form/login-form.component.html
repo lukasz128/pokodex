@@ -1,10 +1,16 @@
 <form class="login-form" [formGroup]="formGroup" #formRef>
   <div class="login-form__inputs-container">
-    <app-input
-      formControlName="username"
-      placeholder="Username"
-      class="login-form__input"
-    />
+    <ui-form-field>
+      <label uiLabel>Username</label>
+
+      <input
+        uiInput
+        type="text"
+        formControlName="username"
+        class="login-form__input"
+      />
+    </ui-form-field>
+
     <app-password-input
       formControlName="password"
       placeholder="Password"
@@ -20,5 +26,7 @@
     </div>
   </div>
 
-  <button type="submit" class="login-form__btn" app-flat-button>Login</button>
+  <button type="submit" class="login-form__btn" ui-flat-btn color="brown">
+    Login
+  </button>
 </form>

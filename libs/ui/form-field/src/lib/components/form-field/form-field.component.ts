@@ -10,9 +10,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { LabelDirective, ValueAccessorBase } from '@pokodex/ui/common';
-import { PrefixDirective } from 'libs/ui/common/src/lib/directives/prefix/prefix.directive';
-import { SuffixDirective } from 'libs/ui/common/src/lib/directives/suffix/suffix.directive';
+import {
+  LabelDirective,
+  PrefixDirective,
+  SuffixDirective,
+  ValueAccessorBase,
+} from '@pokodex/ui/common';
+import { CanColor } from 'libs/ui/common/src/lib/directives/color/can-color.directive';
 import { filter, fromEvent, map, merge, Observable, switchMap } from 'rxjs';
 
 export interface FormFieldContent<TValue> extends ValueAccessorBase<TValue> {
@@ -50,6 +54,7 @@ const AVAILABLE_FORMATS: AvailableFormat[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   providers: [{ provide: UiFormFieldToken, useExisting: UiFormFieldComponent }],
+  hostDirectives: [CanColor],
   host: {
     class: 'ui-form-field',
     '[class.ui-form-field--outline]': `appearance() === 'outline'`,

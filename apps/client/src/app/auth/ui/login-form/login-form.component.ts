@@ -12,7 +12,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { UiFlatButtonComponent } from '@pokodex/ui/button';
+import { UiFormFieldModule } from '@pokodex/ui/form-field';
+import { UiInputDirective } from '@pokodex/ui/input';
 import {
   catchError,
   EMPTY,
@@ -22,10 +26,8 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
-import { FlatButtonComponent } from '../../../shared/ui/flat-button/flat-button.component';
-import { LoginCredentials } from '../../data-access/auth.models';
-import { InputComponent } from '../../../shared/ui/input/input.component';
 import { PasswordInputComponent } from '../../../shared/ui/password-input/password-input.component';
+import { LoginCredentials } from '../../data-access/auth.models';
 
 export type LoginForm = LoginCredentials;
 
@@ -57,10 +59,12 @@ const loginForm = {
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    FlatButtonComponent,
     RouterModule,
-    InputComponent,
     PasswordInputComponent,
+    UiInputDirective,
+    UiFormFieldModule,
+    MatIconModule,
+    UiFlatButtonComponent,
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',

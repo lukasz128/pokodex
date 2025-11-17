@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Directive, inject, InjectionToken } from '@angular/core';
-import { environment } from 'apps/client/src/environments/environment.dev';
+import { environment } from 'apps/client/src/environments/environment';
 
 export const environmentApiUrlToken = new InjectionToken<
   typeof environment.rootUrl

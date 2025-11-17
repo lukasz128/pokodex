@@ -1,7 +1,0 @@
-@use 'mixins/core' as *;
-
-:host {
-  display: block;
-  background-color: transparent;
-  @include resetButton;
-}

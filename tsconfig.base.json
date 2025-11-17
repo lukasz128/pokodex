@@ -17,9 +17,11 @@
     "paths": {
       "@pokodex/interfaces": ["libs/interfaces/src/index.ts"],
       "@pokodex/ui": ["libs/ui/src/index.ts"],
+      "@pokodex/ui/button": ["libs/ui/button/src/index.ts"],
       "@pokodex/ui/common": ["libs/ui/common/src/index.ts"],
       "@pokodex/ui/form-field": ["libs/ui/form-field/src/index.ts"],
-      "@pokodex/ui/input": ["libs/ui/input/src/index.ts"]
+      "@pokodex/ui/input": ["libs/ui/input/src/index.ts"],
+      "@pokodex/ui/layout": ["libs/ui/layout/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,11 +1,9 @@
-@use 'variables/colors';
-
 :host {
   display: block;
   flex: 1;
   height: 100%;
 
-  background-color: colors.getPrimary(700);
+  background-color: var(--ui-primary-700);
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 
@@ -19,7 +17,7 @@
   }
 
   .header {
-    color: colors.$white;
+    color: var(--ui-white);
 
     &__title {
       // NOTE (Fere) think about _typography.scss file
@@ -36,10 +34,10 @@
 }
 
 :host-context(.--white) {
-  background-color: colors.$white;
+  background-color: var(--ui-white);
 
   .header {
-    color: colors.getPrimary(700);
+    color: var(--ui-primary-700);
 
     &__description {
       color: #141414;

@@ -16,13 +16,21 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/client/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/client/src/favicon.ico", "apps/client/src/assets"],
+        "assets": [
+          "apps/client/src/favicon.ico",
+          "apps/client/src/assets",
+          {
+            "input": "libs/ui/src/assets/icons",
+            "glob": "**/*",
+            "output": "assets/icons"
+          }
+        ],
         "styles": [
-          "apps/client/src/styles/utils/_reset.scss",
+          "libs/ui/src/styles/index.scss",
           "apps/client/src/styles.scss"
         ],
         "stylePreprocessorOptions": {
-          "includePaths": ["apps/client/src/styles"]
+          "includePaths": ["apps/client/src/styles", "libs/ui/src/styles"]
         },
         "scripts": []
       },

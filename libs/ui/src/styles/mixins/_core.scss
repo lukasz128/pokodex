@@ -1,0 +1,13 @@
+// TODO (Łukasz): It should't be mixin, change on global class. Consider reset every btn
+@mixin resetButton {
+  outline: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+// TODO (Łukasz): It should't be mixin, change on global class. Consider reset every input
+@mixin inputReset {
+  outline: none;
+  border: none;
+}

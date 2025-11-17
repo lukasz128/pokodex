@@ -7,7 +7,7 @@
   "tags": ["type:ui"],
   "targets": {
     "build": {
-      "executor": "@nx/angular:ng-packagr-lite",
+      "executor": "@nx/angular:package",
       "dependsOn": ["build"],
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
@@ -43,7 +43,7 @@
         "stylePreprocessorOptions": {
           "includePaths": ["libs/ui/src/styles"]
         },
-        "styles": ["apps/client/src/styles/utils/_reset.scss"]
+        "styles": ["libs/ui/src/styles/index.scss"]
       },
       "configurations": {
         "ci": {

@@ -46,14 +46,3 @@ $accentColorContrast: (
 
   @error "Property #{$hue} doesn't exists in #{$palette}";
 }
-
-@function getPrimary($hue: 500) {
-  @return -getColor($primaryColor, $hue);
-}
-
-@function getAccent($hue: 500) {
-  @return -getColor($accentColor, $hue);
-}
-
-$primary: getPrimary();
-$accent: getAccent();

@@ -1,10 +1,9 @@
-@use 'variables/colors';
 @use '../../utils/style/desktop-register-modal' as modal;
 
 :host {
   display: flex;
   height: 100%;
-  background-color: colors.$white;
+  background-color: var(--ui-white);
 
   .pikachu {
     max-width: 428px;
@@ -24,7 +23,7 @@
       align-items: center;
       gap: 40px;
 
-      background-color: colors.$white;
+      background-color: var(--ui-white);
 
       flex: 1;
       height: 100%;
@@ -33,7 +32,7 @@
     &__title {
       font-size: 45px;
       font-weight: bold;
-      color: colors.getPrimary(700);
+      color: var(--ui-primary-700);
 
       margin: 0 20px;
       text-align: center;
@@ -47,12 +46,12 @@
       width: fit-content;
 
       &__text {
-        color: colors.$white;
+        color: var(--ui-white);
         font-size: 18px;
       }
 
       &__icon {
-        color: colors.getPrimary(50);
+        color: var(--ui-primary-50);
         width: 15px;
         height: 15px;
       }
