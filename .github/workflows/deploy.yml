@@ -23,8 +23,8 @@ jobs:
           script: |
             git clone https://${{secrets.GIT_LOGIN}}:${{secrets.GIT_CREDENTIALS}}@github.com/lukasz128/pokodex.git
             cd pokodex
-            git checkout create-ui-library
-            git pull origin create-ui-library
+            git checkout main
+            git pull origin main
             docker compose down
             docker compose pull
             docker compose up -d
