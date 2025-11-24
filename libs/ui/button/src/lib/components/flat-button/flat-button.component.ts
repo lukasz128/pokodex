@@ -1,16 +1,18 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { CanColor } from '@pokodex/ui/common';
+import { CanColorDirective } from '@pokodex/ui/common';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[ui-flat-btn], a[ui-flat-btn]',
   exportAs: 'UiFlatBtn',
   standalone: true,
-  imports: [],
+  imports: [CanColorDirective],
   templateUrl: './flat-button.component.html',
   styleUrl: './flat-button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  hostDirectives: [CanColor],
+  hostDirectives: [
+    { directive: CanColorDirective, inputs: ['uiCanColor : color'] },
+  ],
   host: {
     '[class.disabled]': 'disabled()',
   },

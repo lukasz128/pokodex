@@ -5,7 +5,7 @@ const config: StorybookConfig = {
   addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],
   staticDirs: [
     { from: '../src/assets/icons', to: '/assets/icons' },
-    '../../../apps/client/src/assets/fonts',
+    '../src/styles/config/_fonts.scss',
   ],
   framework: {
     name: '@storybook/angular',

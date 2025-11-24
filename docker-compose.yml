@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: docker-files/Dockerfile-api
-    image: fere12815/pokodex-api.dev:latest
+    image: fere12815/pokodex-api.dev:1.0.0
     ports:
       - '3000:3333'
     environment:
@@ -17,7 +17,7 @@ services:
     build:
       context: .
       dockerfile: docker-files/Dockerfile-client
-    image: fere12815/pokodex-client.dev:latest
+    image: fere12815/pokodex-client.dev:1.0.0
     ports:
       - '80:80'
     depends_on:

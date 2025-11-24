@@ -11,12 +11,12 @@ import {
 } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import {
+  CanColorDirective,
   LabelDirective,
   PrefixDirective,
   SuffixDirective,
   ValueAccessorBase,
 } from '@pokodex/ui/common';
-import { CanColor } from 'libs/ui/common/src/lib/directives/color/can-color.directive';
 import { filter, fromEvent, map, merge, Observable, switchMap } from 'rxjs';
 
 export interface FormFieldContent<TValue> extends ValueAccessorBase<TValue> {
@@ -48,13 +48,15 @@ const AVAILABLE_FORMATS: AvailableFormat[] = [
 @Component({
   selector: 'ui-form-field',
   standalone: true,
-  imports: [],
+  imports: [CanColorDirective],
   templateUrl: './form-field.component.html',
   styleUrl: './form-field.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   providers: [{ provide: UiFormFieldToken, useExisting: UiFormFieldComponent }],
-  hostDirectives: [CanColor],
+  hostDirectives: [
+    { directive: CanColorDirective, inputs: ['uiCanColor : color'] },
+  ],
   host: {
     class: 'ui-form-field',
     '[class.ui-form-field--outline]': `appearance() === 'outline'`,

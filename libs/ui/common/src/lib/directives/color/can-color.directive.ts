@@ -39,8 +39,3 @@ export class CanColorDirective {
     return color || scopedColor || DEFAULT_COLOR;
   });
 }
-
-export const CanColor = {
-  directive: CanColorDirective,
-  inputs: ['uiCanColor : color'],
-};
