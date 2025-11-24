@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   api:
     build:
@@ -28,7 +26,7 @@ services:
   #   build:
   #     context: .
   #     dockerfile: docker-files/Dockerfile-ui
-  #   image: fere12815/pokodex-ui.dev:latest
+  #   image: fere12815/pokodex-ui.dev
   #   ports:
   #     - '80:81'
 
