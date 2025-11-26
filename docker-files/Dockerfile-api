@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+RUN npx nx reset
 RUN npm run build:api
 
 # Stage 2: Run the Express app

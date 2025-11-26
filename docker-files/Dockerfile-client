@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install  --force
 COPY . .
+RUN npx nx reset
 RUN npm run build:client
 
 # Stage 2: Serve the Angular app with Nginx
